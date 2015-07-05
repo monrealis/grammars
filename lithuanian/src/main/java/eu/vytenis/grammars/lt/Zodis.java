@@ -4,7 +4,21 @@ import lombok.Getter;
 
 public class Zodis {
 	@Getter
-	private String kamienas;
+	private final String pradzia;
 	@Getter
-	private String galune;
+	private final String pabaiga;
+
+	public Zodis(String pradzia, String pabaiga) {
+		this.pradzia = pradzia;
+		this.pabaiga = pabaiga;
+	}
+
+	public Zodis withGalune(String galune) {
+		return new Zodis(pradzia, galune);
+	}
+
+	@Override
+	public String toString() {
+		return pradzia + pabaiga;
+	}
 }

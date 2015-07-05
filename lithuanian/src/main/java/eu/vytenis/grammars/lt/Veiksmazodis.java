@@ -4,7 +4,13 @@ import lombok.Getter;
 
 public class Veiksmazodis {
 	@Getter
-	private Zodis zodis;
+	private final Zodis zodis;
 	@Getter
-	private Linksniuote linksniuote;
+	private final Linksniuote linksniuote;
+
+	public Veiksmazodis(Zodis zodis, Linksniuote linksniuote) {
+		this.zodis = zodis;
+		this.linksniuote = linksniuote;
+	}
+
 }
