@@ -23,9 +23,9 @@ public class VeiksmazodziaiTest {
 	}
 
 	private List<String> getAll(Veiksmazodis v) {
-		if (v.getLinksniuote() == Linksniuote.O)
+		if (v.getLinksniuote() == Asmenuote.O)
 			return getAllForO(v.getZodis());
-		if (v.getLinksniuote() == Linksniuote.A)
+		if (v.getLinksniuote() == Asmenuote.A)
 			return getAllForA(v.getZodis());
 		throw new IllegalArgumentException();
 
@@ -46,7 +46,7 @@ public class VeiksmazodziaiTest {
 	}
 
 	private Veiksmazodis parse(String veiksmazodis) {
-		for (Entry<String, Linksniuote> e : createPabaigos().entrySet()) {
+		for (Entry<String, Asmenuote> e : createPabaigos().entrySet()) {
 			Veiksmazodis v = parseWord(veiksmazodis, e.getKey(), e.getValue());
 			if (v != null)
 				return v;
@@ -54,14 +54,14 @@ public class VeiksmazodziaiTest {
 		throw new IllegalArgumentException();
 	}
 
-	private Map<String, Linksniuote> createPabaigos() {
-		Map<String, Linksniuote> pabaigos = new LinkedHashMap<String, Linksniuote>();
-		pabaigos.put("yti", Linksniuote.O);
-		pabaigos.put("ėti", Linksniuote.A);
+	private Map<String, Asmenuote> createPabaigos() {
+		Map<String, Asmenuote> pabaigos = new LinkedHashMap<String, Asmenuote>();
+		pabaigos.put("yti", Asmenuote.O);
+		pabaigos.put("ėti", Asmenuote.A);
 		return pabaigos;
 	}
 
-	private Veiksmazodis parseWord(String v, String pabaiga, Linksniuote l) {
+	private Veiksmazodis parseWord(String v, String pabaiga, Asmenuote l) {
 		if (!v.endsWith(pabaiga))
 			return null;
 		String pradzia = v.substring(0, v.length() - pabaiga.length());

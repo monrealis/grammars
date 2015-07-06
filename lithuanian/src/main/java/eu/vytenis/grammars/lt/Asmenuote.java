@@ -1,5 +1,5 @@
 package eu.vytenis.grammars.lt;
 
-public enum Linksniuote {
+public enum Asmenuote {
 	A, O, I
 }

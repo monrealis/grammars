@@ -6,9 +6,9 @@ public class Veiksmazodis {
 	@Getter
 	private final Zodis zodis;
 	@Getter
-	private final Linksniuote linksniuote;
+	private final Asmenuote linksniuote;
 
-	public Veiksmazodis(Zodis zodis, Linksniuote linksniuote) {
+	public Veiksmazodis(Zodis zodis, Asmenuote linksniuote) {
 		this.zodis = zodis;
 		this.linksniuote = linksniuote;
 	}
