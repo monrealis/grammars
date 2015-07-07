@@ -18,6 +18,11 @@ public class VeiksmazodziaiTest {
 	}
 
 	@Test
+	public void tyleti() {
+		assertEquals(getAll(parse("tylėti")), asList("tyliu", "tyli", "tyli", "tylime", "tylite", "tyli"));
+	}
+
+	@Test
 	public void kelbeti() {
 		assertEquals(getAll(parse("kalbėti")), asList("kalbu", "kalbi", "kalba", "kalbame", "kalbate", "kalba"));
 	}
@@ -27,6 +32,8 @@ public class VeiksmazodziaiTest {
 			return getAllForO(v.getZodis());
 		if (v.getLinksniuote() == Asmenuote.A)
 			return getAllForA(v.getZodis());
+		if (v.getLinksniuote() == Asmenuote.I)
+			return getAllForI(v.getZodis());
 		throw new IllegalArgumentException();
 
 	}
@@ -45,6 +52,13 @@ public class VeiksmazodziaiTest {
 		return r;
 	}
 
+	private List<String> getAllForI(Zodis z) {
+		List<String> r = new ArrayList<String>();
+		for (String g : asList("liu", "li", "li", "lime", "lite", "li"))
+			r.add(z.withGalune(g).toString());
+		return r;
+	}
+
 	private Veiksmazodis parse(String veiksmazodis) {
 		for (Entry<String, Asmenuote> e : createPabaigos().entrySet()) {
 			Veiksmazodis v = parseWord(veiksmazodis, e.getKey(), e.getValue());
@@ -57,6 +71,7 @@ public class VeiksmazodziaiTest {
 	private Map<String, Asmenuote> createPabaigos() {
 		Map<String, Asmenuote> pabaigos = new LinkedHashMap<String, Asmenuote>();
 		pabaigos.put("yti", Asmenuote.O);
+		pabaigos.put("lėti", Asmenuote.I);
 		pabaigos.put("ėti", Asmenuote.A);
 		return pabaigos;
 	}
