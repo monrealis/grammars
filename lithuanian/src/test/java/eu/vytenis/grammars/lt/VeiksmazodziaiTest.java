@@ -56,7 +56,7 @@ public class VeiksmazodziaiTest {
 
 	private List<String> getAllForI(Zodis z) {
 		List<String> r = new ArrayList<String>();
-		for (String g : asList("liu", "li", "li", "lime", "lite", "li"))
+		for (String g : asList("iu", "i", "i", "ime", "ite", "i"))
 			r.add(z.withGalune(g).toString());
 		return r;
 	}
@@ -73,8 +73,8 @@ public class VeiksmazodziaiTest {
 	private Map<String, Asmenuote> createPabaigos() {
 		Map<String, Asmenuote> pabaigos = new LinkedHashMap<String, Asmenuote>();
 		pabaigos.put("yti", Asmenuote.O);
-		pabaigos.put("lėti", Asmenuote.I);
-		pabaigos.put("ėti", Asmenuote.A);
+		pabaigos.put("(?<=l)ėti", Asmenuote.I);
+		pabaigos.put("(?<!l)ėti", Asmenuote.A);
 		return pabaigos;
 	}
 
