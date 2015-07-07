@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -77,10 +79,14 @@ public class VeiksmazodziaiTest {
 	}
 
 	private Veiksmazodis parseWord(String v, String pabaiga, Asmenuote l) {
-		if (!v.endsWith(pabaiga))
+		String re = String.format("(.*)(%s)", pabaiga);
+		Pattern p = Pattern.compile(re);
+		Matcher m = p.matcher(v);
+		if (!m.matches())
 			return null;
-		String pradzia = v.substring(0, v.length() - pabaiga.length());
-		Zodis z = new Zodis(pradzia, pabaiga);
+		String pradzia = m.group(1);
+		String pab = m.group(2);
+		Zodis z = new Zodis(pradzia, pab);
 		return new Veiksmazodis(z, l);
 	}
 }
