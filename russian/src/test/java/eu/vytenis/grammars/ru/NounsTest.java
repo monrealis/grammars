@@ -11,8 +11,8 @@ import org.junit.Test;
 public class NounsTest {
 	@Test
 	public void table() {
-		List<String> expected = asList("стол", "стол", "стола", "столу", "столом", "столе");
-		assertEquals(expected, decline("стол"));
+		assertEquals(asList("стол", "стол", "стола", "столу", "столом", "столе"), decline("стол"));
+		assertEquals(asList("столы", "столы", "столов", "столам", "столами", "столах"), declinePlural("стол"));
 	}
 
 	private List<String> decline(String word) {
@@ -22,7 +22,18 @@ public class NounsTest {
 		r.add(word + "а");
 		r.add(word + "у");
 		r.add(word + "ом");
-		r.add(word + "");
+		r.add(word + "е");
+		return r;
+	}
+
+	private List<String> declinePlural(String word) {
+		List<String> r = new ArrayList<String>();
+		r.add(word + "ы");
+		r.add(word + "ы");
+		r.add(word + "ов");
+		r.add(word + "ам");
+		r.add(word + "ами");
+		r.add(word + "ах");
 		return r;
 	}
 }
