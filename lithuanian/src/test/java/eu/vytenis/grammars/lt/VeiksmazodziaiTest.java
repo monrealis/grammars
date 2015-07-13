@@ -11,7 +11,10 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
+import eu.vytenis.grammars.lt.verbs.Asmenuote;
 
 public class VeiksmazodziaiTest {
 	@Test
@@ -27,6 +30,12 @@ public class VeiksmazodziaiTest {
 	@Test
 	public void kelbeti() {
 		assertEquals(getAll(parse("kalbėti")), asList("kalbu", "kalbi", "kalba", "kalbame", "kalbate", "kalba"));
+	}
+	
+	@Test
+	@Ignore
+	public void pusti() {
+		assertEquals(getAll(parse("pūsti")), asList("pučiu", "puti", "pučia", "pučiame", "pučiate", "pučia"));
 	}
 
 	private List<String> getAll(Veiksmazodis v) {
@@ -75,6 +84,7 @@ public class VeiksmazodziaiTest {
 		pabaigos.put("yti", Asmenuote.O);
 		pabaigos.put("(?<=l)ėti", Asmenuote.I);
 		pabaigos.put("(?<!l)ėti", Asmenuote.A);
+		pabaigos.put("ti", Asmenuote.A);
 		return pabaigos;
 	}
 

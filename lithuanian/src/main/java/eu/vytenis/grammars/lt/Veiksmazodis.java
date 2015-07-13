@@ -1,5 +1,6 @@
 package eu.vytenis.grammars.lt;
 
+import eu.vytenis.grammars.lt.verbs.Asmenuote;
 import lombok.Getter;
 
 public class Veiksmazodis {
