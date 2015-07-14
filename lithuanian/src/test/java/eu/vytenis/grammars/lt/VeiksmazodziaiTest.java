@@ -3,7 +3,6 @@ package eu.vytenis.grammars.lt;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,23 +14,25 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.vytenis.grammars.lt.verbs.Asmenuote;
+import eu.vytenis.grammars.lt.verbs.Asmenuotojas;
+import eu.vytenis.grammars.lt.verbs.AsmenuotojasMaker;
 
 public class VeiksmazodziaiTest {
 	@Test
 	public void matyti() {
-		assertEquals(getAll(parse("matyti")), asList("matau", "matai", "mato", "matome", "matote", "mato"));
+		assertEquals(asList("matau", "matai", "mato", "matome", "matote", "mato"), getAll(parse("matyti")));
 	}
 
 	@Test
 	public void tyleti() {
-		assertEquals(getAll(parse("tylėti")), asList("tyliu", "tyli", "tyli", "tylime", "tylite", "tyli"));
+		assertEquals(asList("tyliu", "tyli", "tyli", "tylime", "tylite", "tyli"), getAll(parse("tylėti")));
 	}
 
 	@Test
 	public void kelbeti() {
-		assertEquals(getAll(parse("kalbėti")), asList("kalbu", "kalbi", "kalba", "kalbame", "kalbate", "kalba"));
+		assertEquals(asList("kalbu", "kalbi", "kalba", "kalbame", "kalbate", "kalba"), getAll(parse("kalbėti")));
 	}
-	
+
 	@Test
 	@Ignore
 	public void pusti() {
@@ -39,35 +40,8 @@ public class VeiksmazodziaiTest {
 	}
 
 	private List<String> getAll(Veiksmazodis v) {
-		if (v.getLinksniuote() == Asmenuote.O)
-			return getAllForO(v.getZodis());
-		if (v.getLinksniuote() == Asmenuote.A)
-			return getAllForA(v.getZodis());
-		if (v.getLinksniuote() == Asmenuote.I)
-			return getAllForI(v.getZodis());
-		throw new IllegalArgumentException();
-
-	}
-
-	private List<String> getAllForO(Zodis z) {
-		List<String> r = new ArrayList<String>();
-		for (String g : asList("au", "ai", "o", "ome", "ote", "o"))
-			r.add(z.withGalune(g).toString());
-		return r;
-	}
-
-	private List<String> getAllForA(Zodis z) {
-		List<String> r = new ArrayList<String>();
-		for (String g : asList("u", "i", "a", "ame", "ate", "a"))
-			r.add(z.withGalune(g).toString());
-		return r;
-	}
-
-	private List<String> getAllForI(Zodis z) {
-		List<String> r = new ArrayList<String>();
-		for (String g : asList("iu", "i", "i", "ime", "ite", "i"))
-			r.add(z.withGalune(g).toString());
-		return r;
+		Asmenuotojas m = v.getLinksniuote().accept(new AsmenuotojasMaker());
+		return m.getAll(v.getZodis());
 	}
 
 	private Veiksmazodis parse(String veiksmazodis) {
