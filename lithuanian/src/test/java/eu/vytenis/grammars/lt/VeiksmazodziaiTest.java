@@ -40,7 +40,7 @@ public class VeiksmazodziaiTest {
 	}
 
 	private List<String> getAll(Veiksmazodis v) {
-		Asmenuotojas m = v.getLinksniuote().accept(new AsmenuotojasMaker());
+		Asmenuotojas m = v.getAsmenuote().accept(new AsmenuotojasMaker());
 		return m.getAll(v.getZodis());
 	}
 
