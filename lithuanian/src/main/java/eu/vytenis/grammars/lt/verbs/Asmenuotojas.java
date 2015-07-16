@@ -1,38 +1,40 @@
 package eu.vytenis.grammars.lt.verbs;
 
-import static java.util.Arrays.asList;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import eu.vytenis.grammars.lt.Zodis;
 
 public abstract class Asmenuotojas {
-	private final List<String> vns;
-	private final List<String> dgs;
+	private final Map<Skaicius, Map<Asmuo, String>> galunes = new TreeMap<Skaicius, Map<Asmuo, String>>();
 
 	public Asmenuotojas(String... galunes) {
-		this.vns = asList(galunes).subList(0, Asmuo.values().length);
-		this.dgs = asList(galunes).subList(Asmuo.values().length, galunes.length);
+		Map<Asmuo, String> v = new TreeMap<Asmuo, String>();
+		Map<Asmuo, String> d = new TreeMap<Asmuo, String>();
+		this.galunes.put(Skaicius.Vns, v);
+		this.galunes.put(Skaicius.Dgs, d);
+		v.put(Asmuo.Pirmas, galunes[0]);
+		v.put(Asmuo.Antras, galunes[1]);
+		v.put(Asmuo.Trecias, galunes[2]);
+		d.put(Asmuo.Pirmas, galunes[3]);
+		d.put(Asmuo.Antras, galunes[4]);
+		d.put(Asmuo.Trecias, galunes[5]);
 	}
 
 	public List<String> getAll(Zodis z) {
 		List<String> r = new ArrayList<String>();
-		r.add(getVns(z, Asmuo.Pirmas));
-		r.add(getVns(z, Asmuo.Antras));
-		r.add(getVns(z, Asmuo.Trecias));
-		r.add(getDgs(z, Asmuo.Pirmas));
-		r.add(getDgs(z, Asmuo.Antras));
-		r.add(getDgs(z, Asmuo.Trecias));
+		r.add(getZodis(z, Skaicius.Vns, Asmuo.Pirmas));
+		r.add(getZodis(z, Skaicius.Vns, Asmuo.Antras));
+		r.add(getZodis(z, Skaicius.Vns, Asmuo.Trecias));
+		r.add(getZodis(z, Skaicius.Dgs, Asmuo.Pirmas));
+		r.add(getZodis(z, Skaicius.Dgs, Asmuo.Antras));
+		r.add(getZodis(z, Skaicius.Dgs, Asmuo.Trecias));
 		return r;
 	}
 
-	public String getVns(Zodis z, Asmuo a) {
-		return z.withGalune(vns.get(a.index())).toString();
-
-	}
-
-	public String getDgs(Zodis z, Asmuo a) {
-		return z.withGalune(dgs.get(a.index())).toString();
+	public String getZodis(Zodis z, Skaicius s, Asmuo a) {
+		return z.withGalune(galunes.get(s).get(a)).toString();
 	}
 }

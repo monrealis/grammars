@@ -36,7 +36,7 @@ public class VeiksmazodziaiTest {
 	@Test
 	@Ignore
 	public void pusti() {
-		assertEquals(getAll(parse("pūsti")), asList("pučiu", "puti", "pučia", "pučiame", "pučiate", "pučia"));
+		assertEquals(asList("pučiu", "puti", "pučia", "pučiame", "pučiate", "pučia").toString(), getAll(parse("pūsti")).toString());
 	}
 
 	private List<String> getAll(Veiksmazodis v) {
