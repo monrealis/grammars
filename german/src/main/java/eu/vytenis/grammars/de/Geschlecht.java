@@ -1,5 +1,5 @@
 package eu.vytenis.grammars.de;
 
-public enum Gender {
+public enum Geschlecht {
 	Mannlich, Weiblich, Neutral;
 }
