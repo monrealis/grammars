@@ -1,5 +1,5 @@
 package eu.vytenis.grammars.de;
 
-public class Artikel {
+public interface Artikel extends GeschlechtBesitzer {
 
 }

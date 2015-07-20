@@ -1,5 +1,13 @@
 package eu.vytenis.grammars.de;
 
-public enum BestimmteArtikel {
-	Der, Die, Das
+import lombok.Getter;
+
+public enum BestimmteArtikel implements Artikel {
+	Der(Geschlecht.Mannlich), Die(Geschlecht.Weiblich), Das(Geschlecht.Neutral);
+	@Getter
+	private Geschlecht geschlecht;
+
+	private BestimmteArtikel(Geschlecht geschlecht) {
+		this.geschlecht = geschlecht;
+	}
 }
