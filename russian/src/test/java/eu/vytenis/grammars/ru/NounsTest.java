@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class NounsTest {
@@ -19,6 +20,25 @@ public class NounsTest {
 	public void fish() {
 		List<String> singular = asList("рыьа", "рыьу", "рыьы", "рыье", "рыьои", "рыье");
 		assertEquals(singular, declineSingularFeminine("рыьа"));
+	}
+
+	@Test
+	@Ignore
+	public void wine() {
+		List<String> singular = asList("вино", "вино", "вина", "вину", "вином", "вине");
+		assertEquals(singular.toString(), declineSingularForNeutral("вино").toString());
+	}
+
+	private List<String> declineSingularForNeutral(String word) {
+		List<String> r = new ArrayList<String>();
+		String stem = word.substring(0, word.length() - 1);
+		r.add(stem + "");
+		r.add(stem + "");
+		r.add(stem + "а");
+		r.add(stem + "у");
+		r.add(stem + "ом");
+		r.add(stem + "е");
+		return r;
 	}
 
 	private List<String> declineSingular(String word) {
