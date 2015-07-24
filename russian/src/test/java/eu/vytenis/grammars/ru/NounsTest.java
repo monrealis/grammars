@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class NounsTest {
@@ -23,21 +22,17 @@ public class NounsTest {
 	}
 
 	@Test
-	@Ignore
 	public void wine() {
 		List<String> singular = asList("вино", "вино", "вина", "вину", "вином", "вине");
-		assertEquals(singular.toString(), declineSingularForNeutral("вино").toString());
+		assertEquals(singular.toString(), declineSingularForNeutral(new Word("вин", "о")).toString());
 	}
 
-	private List<String> declineSingularForNeutral(String word) {
+	private List<String> declineSingularForNeutral(Word word) {
 		List<String> r = new ArrayList<String>();
-		String stem = word.substring(0, word.length() - 1);
-		r.add(stem + "");
-		r.add(stem + "");
-		r.add(stem + "а");
-		r.add(stem + "у");
-		r.add(stem + "ом");
-		r.add(stem + "е");
+		String[] endings = { "о", "о", "а", "у", "ом", "е" };
+		for (String s : endings) {
+			r.add(word.withEnding(s).toString());
+		}
 		return r;
 	}
 
