@@ -11,8 +11,9 @@ import org.junit.Test;
 public class NounsTest {
 	@Test
 	public void table() {
-		assertEquals(asList("стол", "стол", "стола", "столу", "столом", "столе"), declineSingular("стол"));
-		assertEquals(asList("столы", "столы", "столов", "столам", "столами", "столах"), declinePlural("стол"));
+		Word w = new Word("стол", "");
+		assertEquals(asList("стол", "стол", "стола", "столу", "столом", "столе"), declineSingular(w));
+		assertEquals(asList("столы", "столы", "столов", "столам", "столами", "столах"), declinePlural(w));
 	}
 
 	@Test
@@ -30,47 +31,33 @@ public class NounsTest {
 		assertEquals(singular.toString(), declineSingularForNeutral(new Word("вин", "о")).toString());
 	}
 
+	private List<String> declineSingular(Word word) {
+		String[] endings = { "", "", "а", "у", "ом", "е" };
+		return declineWord(word, endings);
+	}
+
+	private List<String> declinePlural(Word word) {
+		String[] endings = { "ы", "ы", "ов", "ам", "ами", "ах" };
+		return declineWord(word, endings);
+	}
+
 	private List<String> declineSingularForNeutral(Word word) {
-		List<String> r = new ArrayList<String>();
 		String[] endings = { "о", "о", "а", "у", "ом", "е" };
-		for (String s : endings)
-			r.add(word.withEnding(s).toString());
-		return r;
+		return declineWord(word, endings);
 	}
 
 	private List<String> declinePluralFeminine(Word word) {
-		List<String> r = new ArrayList<String>();
 		String[] endings = { "ы", "ы", "", "ам", "ами", "ах" };
-		for (String s : endings)
-			r.add(word.withEnding(s).toString());
-		return r;
-	}
-
-	private List<String> declineSingular(String word) {
-		List<String> r = new ArrayList<String>();
-		r.add(word + "");
-		r.add(word + "");
-		r.add(word + "а");
-		r.add(word + "у");
-		r.add(word + "ом");
-		r.add(word + "е");
-		return r;
-	}
-
-	private List<String> declinePlural(String word) {
-		List<String> r = new ArrayList<String>();
-		r.add(word + "ы");
-		r.add(word + "ы");
-		r.add(word + "ов");
-		r.add(word + "ам");
-		r.add(word + "ами");
-		r.add(word + "ах");
-		return r;
+		return declineWord(word, endings);
 	}
 
 	private List<String> declineSingularFeminine(Word word) {
-		List<String> r = new ArrayList<String>();
 		String[] endings = { "а", "у", "ы", "е", "ои", "е" };
+		return declineWord(word, endings);
+	}
+
+	private List<String> declineWord(Word word, String[] endings) {
+		List<String> r = new ArrayList<String>();
 		for (String s : endings)
 			r.add(word.withEnding(s).toString());
 		return r;
