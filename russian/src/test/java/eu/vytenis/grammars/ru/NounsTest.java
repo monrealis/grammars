@@ -17,8 +17,11 @@ public class NounsTest {
 
 	@Test
 	public void fish() {
-		List<String> singular = asList("рыьа", "рыьу", "рыьы", "рыье", "рыьои", "рыье");
-		assertEquals(singular, declineSingularFeminine("рыьа"));
+		List<String> singular = asList("рыба", "рыбу", "рыбы", "рыбе", "рыбои", "рыбе");
+		List<String> plural = asList("рыбы", "рыбы", "рыб", "рыбам", "рыбами", "рыбах");
+		Word w = new Word("рыб", "а");
+		assertEquals(singular, declineSingularFeminine(w));
+		assertEquals(plural.toString(), declinePluralFeminine(w).toString());
 	}
 
 	@Test
@@ -30,9 +33,16 @@ public class NounsTest {
 	private List<String> declineSingularForNeutral(Word word) {
 		List<String> r = new ArrayList<String>();
 		String[] endings = { "о", "о", "а", "у", "ом", "е" };
-		for (String s : endings) {
+		for (String s : endings)
 			r.add(word.withEnding(s).toString());
-		}
+		return r;
+	}
+
+	private List<String> declinePluralFeminine(Word word) {
+		List<String> r = new ArrayList<String>();
+		String[] endings = { "ы", "ы", "", "ам", "ами", "ах" };
+		for (String s : endings)
+			r.add(word.withEnding(s).toString());
 		return r;
 	}
 
@@ -58,15 +68,11 @@ public class NounsTest {
 		return r;
 	}
 
-	private List<String> declineSingularFeminine(String word) {
+	private List<String> declineSingularFeminine(Word word) {
 		List<String> r = new ArrayList<String>();
-		String stem = word.substring(0, word.length() - 1);
-		r.add(stem + "а");
-		r.add(stem + "у");
-		r.add(stem + "ы");
-		r.add(stem + "е");
-		r.add(stem + "ои");
-		r.add(stem + "е");
+		String[] endings = { "а", "у", "ы", "е", "ои", "е" };
+		for (String s : endings)
+			r.add(word.withEnding(s).toString());
 		return r;
 	}
 }
