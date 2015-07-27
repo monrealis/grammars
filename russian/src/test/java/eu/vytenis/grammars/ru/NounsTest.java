@@ -28,7 +28,10 @@ public class NounsTest {
 	@Test
 	public void wine() {
 		List<String> singular = asList("вино", "вино", "вина", "вину", "вином", "вине");
-		assertEquals(singular.toString(), declineSingularForNeutral(new Word("вин", "о")).toString());
+		List<String> plural = asList("вина", "вина", "вин", "винам", "винами", "винах");
+		Word w = new Word("вин", "о");
+		assertEquals(singular.toString(), declineSingularForNeutral(w).toString());
+		assertEquals(plural.toString(), declinePluralForNeutral(w).toString());
 	}
 
 	private List<String> declineSingular(Word word) {
@@ -43,6 +46,11 @@ public class NounsTest {
 
 	private List<String> declineSingularForNeutral(Word word) {
 		String[] endings = { "о", "о", "а", "у", "ом", "е" };
+		return declineWord(word, endings);
+	}
+
+	private List<String> declinePluralForNeutral(Word word) {
+		String[] endings = { "а", "а", "", "ам", "ами", "ах" };
 		return declineWord(word, endings);
 	}
 
