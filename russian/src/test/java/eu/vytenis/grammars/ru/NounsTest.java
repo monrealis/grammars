@@ -12,24 +12,26 @@ public class NounsTest {
 	@Test
 	public void table() {
 		Word w = new Word("стол", "");
-		assertEquals(asList("стол", "стол", "стола", "столу", "столом", "столе"), declineSingular(w));
-		assertEquals(asList("столы", "столы", "столов", "столам", "столами", "столах"), declinePlural(w));
+		List<String> singular = asList("стол", "стол", "стола", "столу", "столом", "столе");
+		List<String> plural = asList("столы", "столы", "столов", "столам", "столами", "столах");
+		assertEquals(singular, declineSingular(w));
+		assertEquals(plural, declinePlural(w));
 	}
 
 	@Test
 	public void fish() {
+		Word w = new Word("рыб", "а");
 		List<String> singular = asList("рыба", "рыбу", "рыбы", "рыбе", "рыбои", "рыбе");
 		List<String> plural = asList("рыбы", "рыбы", "рыб", "рыбам", "рыбами", "рыбах");
-		Word w = new Word("рыб", "а");
 		assertEquals(singular, declineSingularFeminine(w));
-		assertEquals(plural.toString(), declinePluralFeminine(w).toString());
+		assertEquals(plural, declinePluralFeminine(w));
 	}
 
 	@Test
 	public void wine() {
+		Word w = new Word("вин", "о");
 		List<String> singular = asList("вино", "вино", "вина", "вину", "вином", "вине");
 		List<String> plural = asList("вина", "вина", "вин", "винам", "винами", "винах");
-		Word w = new Word("вин", "о");
 		assertEquals(singular.toString(), declineSingularForNeutral(w).toString());
 		assertEquals(plural.toString(), declinePluralForNeutral(w).toString());
 	}
