@@ -10,4 +10,9 @@ public enum BestimmteArtikel implements Artikel {
 	private BestimmteArtikel(Geschlecht geschlecht) {
 		this.geschlecht = geschlecht;
 	}
+
+	@Override
+	public String toString() {
+		return name().toLowerCase();
+	}
 }

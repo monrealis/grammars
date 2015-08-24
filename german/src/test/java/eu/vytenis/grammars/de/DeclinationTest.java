@@ -1,7 +1,11 @@
 package eu.vytenis.grammars.de;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
@@ -30,5 +34,10 @@ public class DeclinationTest {
 		texts.add("einer neuen Bluse");
 		texts.add("einer neuen Bluse");
 		texts.add("eine neue Bluse");
+	}
+	
+	@Test
+	public void constructsSimplePhrase() {
+		assertEquals("der neue Mantel", new Phrase(BestimmteArtikel.Der, new Wort("neue"), new Substantiv("Mantel")).toString());
 	}
 }
