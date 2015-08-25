@@ -8,5 +8,10 @@ public class Adjektiv {
 
 	public Adjektiv(String word) {
 		this.word = word;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return word;
+	}
 }
