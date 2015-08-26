@@ -2,6 +2,7 @@ package eu.vytenis.grammars.de;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StructureParser {
 	public String parse(Phrase p) {
@@ -20,5 +21,9 @@ public class StructureParser {
 		if (o instanceof Substantiv)
 			return "S";
 		throw new IllegalArgumentException(o.toString());
+	}
+
+	public boolean matches(Phrase p, String regexp) {
+		return Pattern.compile(regexp).matcher(parse(p)).matches();
 	}
 }
