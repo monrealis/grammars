@@ -14,14 +14,14 @@ public class StructureParserTest {
 	public void parse() {
 		assertEquals("DerAS", parser.parse(phrase));
 	}
-	
-	@Test	
+
+	@Test
 	public void matchesWhole() {
 		assertTrue(parser.matches(phrase, "DerAS"));
 	}
-	
+
 	@Test
 	public void doesNotMatchPartially() {
-		assertFalse(parser.matches(phrase, "A"));		
+		assertFalse(parser.matches(phrase, "A"));
 	}
 }
