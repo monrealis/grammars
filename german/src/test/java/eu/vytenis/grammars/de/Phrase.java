@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Phrase {
 	private List<Object> words = new ArrayList<Object>();
-	
+
 	public Phrase(Object... words) {
 		this.words.addAll(asList(words));
 	}
-			
+
 	@Override
 	public String toString() {
 		List<String> s = new ArrayList<String>();
@@ -20,7 +20,7 @@ public class Phrase {
 			s.add(o.toString());
 		return String.join(" ", s);
 	}
-	
+
 	public List<Object> getWords() {
 		return unmodifiableList(words);
 	}
