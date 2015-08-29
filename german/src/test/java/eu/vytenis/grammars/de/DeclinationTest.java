@@ -35,7 +35,7 @@ public class DeclinationTest {
 		texts.add("einer neuen Bluse");
 		texts.add("eine neue Bluse");
 	}
-	
+
 	@Test
 	public void constructsSimplePhrase() {
 		assertEquals("der neue Mantel", new Phrase(BestimmteArtikel.Der, new Wort("neue"), new Substantiv("Mantel")).toString());
