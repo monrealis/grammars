@@ -24,4 +24,9 @@ public class StructureParserTest {
 	public void doesNotMatchPartially() {
 		assertFalse(parser.matches(phrase, "A"));
 	}
+
+	@Test
+	public void matchesWithGroups() {
+		assertTrue(parser.matches(phrase, "(Der)(A)(S)"));
+	}
 }
