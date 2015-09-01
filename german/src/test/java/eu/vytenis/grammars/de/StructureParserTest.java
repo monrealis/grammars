@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class StructureParserTest {
@@ -30,15 +29,17 @@ public class StructureParserTest {
 	public void matchesWithGroups() {
 		assertTrue(parser.matches(phrase, "(Der)(A)(S)"));
 	}
-	
+
 	@Test
 	public void matchesWithNamedGroups() {
 		assertTrue(parser.matches(phrase, "(Der)(?<A>A)(S)"));
 	}
-	
+
 	@Test
-	@Ignore // Not implemented
 	public void get() {
-		parser.get(phrase, "(Der)(?<A>A)(S)", "A");
+		String exp = "(?<D>Der)(?<A>A)(?<S>S)";
+		assertEquals("der", parser.getAsString(phrase, exp, "D"));
+		assertEquals("neu", parser.getAsString(phrase, exp, "A"));
+		assertEquals("Mantel", parser.getAsString(phrase, exp, "S"));
 	}
 }

@@ -1,7 +1,5 @@
 package eu.vytenis.grammars.de;
 
-import static java.util.Collections.emptyList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -34,7 +32,19 @@ public class StructureParser {
 		return Pattern.compile(regexp).matcher(parse(p));
 	}
 
-	// Not implemented
+	public String getAsString(Phrase p, String regexp, String groupName) {
+		return String.join("", getStrings(p, regexp, groupName));
+
+	}
+
+	private List<String> getStrings(Phrase p, String regexp, String groupName) {
+		List<String> strings = new ArrayList<String>();
+		for (Object o : get(p, regexp, groupName))
+			strings.add(o.toString());
+		return strings;
+	}
+
+	// TODO refactor
 	public List<Object> get(Phrase p, String regexp, String groupName) {
 		if (!matches(p, regexp))
 			throw new IllegalArgumentException(regexp);
@@ -42,6 +52,15 @@ public class StructureParser {
 		m.matches();
 		int s = m.start(groupName);
 		int e = m.end(groupName);
-		return new ArrayList<Object>(p.getWords().subList(s, e));
+		int numberOfCapitalsBefore = 0;
+		int numberOfCapitalsInside = 0;
+		String group = m.group();
+		for (int i = 0; i < s; ++i)
+			if (Character.isUpperCase(group.charAt(i)))
+				numberOfCapitalsBefore++;
+		for (int i = s; i < e; ++i)
+			if (Character.isUpperCase(group.charAt(i)))
+				numberOfCapitalsInside++;
+		return new ArrayList<Object>(p.getWords().subList(numberOfCapitalsBefore, numberOfCapitalsBefore + numberOfCapitalsInside));
 	}
 }
