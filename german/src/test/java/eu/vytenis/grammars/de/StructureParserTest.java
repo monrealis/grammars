@@ -9,6 +9,7 @@ import org.junit.Test;
 public class StructureParserTest {
 	private StructureParser parser = new StructureParser();
 	private Phrase phrase = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu"), new Substantiv("Mantel"));
+	private Phrase phrase2Adj = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu"), new Adjektiv("rot"), new Substantiv("Mantel"));
 
 	@Test
 	public void parse() {
@@ -36,10 +37,20 @@ public class StructureParserTest {
 	}
 
 	@Test
-	public void get() {
-		String exp = "(?<D>Der)(?<A>A)(?<S>S)";
-		assertEquals("der", parser.getAsString(phrase, exp, "D"));
-		assertEquals("neu", parser.getAsString(phrase, exp, "A"));
-		assertEquals("Mantel", parser.getAsString(phrase, exp, "S"));
+	public void getsNamedGroups() {
+		String regexp = "(?<D>Der)(?<A>A)(?<S>S)";
+		assertEquals("der", getAsString(regexp, "D"));
+		assertEquals("neu", getAsString(regexp, "A"));
+		assertEquals("Mantel", getAsString(regexp, "S"));
+	}
+
+	@Test
+	public void getsTwoAdjectives() {
+		phrase = phrase2Adj;
+		assertEquals("neu rot", getAsString("(?<D>Der)(?<A>A+)(?<S>S)", "A"));
+	}
+
+	private String getAsString(String regexp, String groupName) {
+		return parser.getAsString(phrase, regexp, groupName);
 	}
 }

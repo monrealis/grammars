@@ -33,7 +33,7 @@ public class StructureParser {
 	}
 
 	public String getAsString(Phrase p, String regexp, String groupName) {
-		return String.join("", getStrings(p, regexp, groupName));
+		return String.join(" ", getStrings(p, regexp, groupName));
 
 	}
 
