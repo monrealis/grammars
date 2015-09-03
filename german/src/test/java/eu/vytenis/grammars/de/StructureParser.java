@@ -52,15 +52,16 @@ public class StructureParser {
 		m.matches();
 		int s = m.start(groupName);
 		int e = m.end(groupName);
-		int numberOfCapitalsBefore = 0;
-		int numberOfCapitalsInside = 0;
-		String group = m.group();
-		for (int i = 0; i < s; ++i)
-			if (Character.isUpperCase(group.charAt(i)))
-				numberOfCapitalsBefore++;
-		for (int i = s; i < e; ++i)
-			if (Character.isUpperCase(group.charAt(i)))
-				numberOfCapitalsInside++;
+		int numberOfCapitalsBefore = getNumberOfCapitalLetters(m.group(), 0, s);
+		int numberOfCapitalsInside = getNumberOfCapitalLetters(m.group(), s, e);
 		return new ArrayList<Object>(p.getWords().subList(numberOfCapitalsBefore, numberOfCapitalsBefore + numberOfCapitalsInside));
+	}
+
+	private int getNumberOfCapitalLetters(String group, int from, int to) {
+		int r = 0;
+		for (int i = from; i < to; ++i)
+			if (Character.isUpperCase(group.charAt(i)))
+				r++;
+		return r;
 	}
 }
