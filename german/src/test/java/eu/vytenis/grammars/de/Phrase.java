@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Phrase {
-	private List<Object> words = new ArrayList<Object>();
+	private List<Part> words = new ArrayList<Part>();
 
-	public Phrase(Object... words) {
+	public Phrase(Part... words) {
 		this.words.addAll(asList(words));
 	}
 
@@ -21,7 +21,7 @@ public class Phrase {
 		return String.join(" ", s);
 	}
 
-	public List<Object> getWords() {
+	public List<Part> getWords() {
 		return unmodifiableList(words);
 	}
 }

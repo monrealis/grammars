@@ -2,7 +2,7 @@ package eu.vytenis.grammars.de;
 
 import lombok.Getter;
 
-public class Substantiv {
+public class Substantiv implements Part {
 	@Getter
 	private final String word;
 

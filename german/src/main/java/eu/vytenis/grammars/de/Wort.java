@@ -2,7 +2,7 @@ package eu.vytenis.grammars.de;
 
 import lombok.Getter;
 
-public class Wort {
+public class Wort implements Part {
 	@Getter
 	private final String beginning;
 	@Getter

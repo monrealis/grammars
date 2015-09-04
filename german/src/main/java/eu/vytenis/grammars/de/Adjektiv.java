@@ -2,7 +2,7 @@ package eu.vytenis.grammars.de;
 
 import lombok.Getter;
 
-public class Adjektiv {
+public class Adjektiv implements Part {
 	@Getter
 	private final String word;
 
