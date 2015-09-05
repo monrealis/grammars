@@ -28,6 +28,13 @@ public class StructureParser {
 		return matcher(p, regexp).matches();
 	}
 
+	private Matcher matchingMatcher(Phrase p, String regexp) {
+		Matcher m = matcher(p, regexp);
+		if (!m.matches())
+			throw new IllegalArgumentException(regexp);
+		return m;
+	}
+
 	private Matcher matcher(Phrase p, String regexp) {
 		return Pattern.compile(regexp).matcher(parse(p));
 	}
@@ -46,10 +53,7 @@ public class StructureParser {
 
 	// TODO refactor
 	public List<Object> get(Phrase p, String regexp, String groupName) {
-		if (!matches(p, regexp))
-			throw new IllegalArgumentException(regexp);
-		Matcher m = matcher(p, regexp);
-		m.matches();
+		Matcher m = matchingMatcher(p, regexp);
 		int s = m.start(groupName);
 		int e = m.end(groupName);
 		int numberOfCapitalsBefore = getNumberOfCapitalLetters(m.group(), 0, s);
