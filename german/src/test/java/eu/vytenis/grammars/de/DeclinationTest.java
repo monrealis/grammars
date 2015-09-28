@@ -9,6 +9,7 @@ import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
+	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new Wort("neu"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -38,6 +39,40 @@ public class DeclinationTest {
 
 	@Test
 	public void constructsSimplePhrase() {
-		assertEquals("der neue Mantel", new Phrase(BestimmteArtikel.Der, new Wort("neue"), new Substantiv("Mantel")).toString());
+		assertEquals("der neu Mantel", mantel.toString()); // Neteisingas
+	}
+
+	@Test
+	public void declinesDenNeuenMantel() {
+		assertEquals(4, declineMantel().size());
+		assertEquals("der neue Mantel", declineMantel().get(0));
+		assertEquals("des neuen Mantels", declineMantel().get(1));
+	}
+
+	private List<String> declineMantel() {
+		List<String> r = new ArrayList<String>();
+		for (Kasus k : Kasus.values())
+			r.add(declineBestimmte(mantel, k));
+		return r;
+
+	}
+
+	private String declineBestimmte(Phrase phrase, Kasus k) {
+		List<Part> w = new ArrayList<Part>();
+		if (k == Kasus.Nominativ)
+			w.add(BestimmteArtikel.Der);
+		else if (k == Kasus.Genitiv)
+			w.add(new Wort("des"));
+		Wort adj = (Wort) phrase.getWords().get(1);
+		if (k == Kasus.Nominativ)
+			w.add(adj.withEnding("e"));
+		else if (k == Kasus.Genitiv)
+			w.add(adj.withEnding("en"));
+		Substantiv noun = (Substantiv) phrase.getWords().get(2);
+		if (k == Kasus.Nominativ)
+			w.add(noun);
+		else if (k == Kasus.Genitiv)
+			w.add(new Wort(noun.toString()).withEnding("s"));
+		return new Phrase(w.toArray(new Part[] {})).toString();
 	}
 }
