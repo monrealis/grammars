@@ -58,21 +58,6 @@ public class DeclinationTest {
 	}
 
 	private String declineBestimmte(Phrase phrase, Kasus k) {
-		List<Part> w = new ArrayList<Part>();
-		if (k == Kasus.Nominativ)
-			w.add(BestimmteArtikel.Der);
-		else if (k == Kasus.Genitiv)
-			w.add(new Wort("des"));
-		Wort adj = (Wort) phrase.getWords().get(1);
-		if (k == Kasus.Nominativ)
-			w.add(adj.withEnding("e"));
-		else if (k == Kasus.Genitiv)
-			w.add(adj.withEnding("en"));
-		Substantiv noun = (Substantiv) phrase.getWords().get(2);
-		if (k == Kasus.Nominativ)
-			w.add(noun);
-		else if (k == Kasus.Genitiv)
-			w.add(new Wort(noun.toString()).withEnding("s"));
-		return new Phrase(w.toArray(new Part[] {})).toString();
+		return new Decliner(phrase, k).decline();
 	}
 }
