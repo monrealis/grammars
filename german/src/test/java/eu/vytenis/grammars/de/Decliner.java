@@ -18,7 +18,7 @@ public class Decliner {
 			w.add(BestimmteArtikel.Der);
 		else if (kasus == Kasus.Genitiv)
 			w.add(new Wort("des"));
-		Wort adj = (Wort) phrase.getWords().get(1);
+		AdjektivForm adj = (AdjektivForm) phrase.getWords().get(1);
 		if (kasus == Kasus.Nominativ)
 			w.add(adj.withEnding("e"));
 		else if (kasus == Kasus.Genitiv)

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
-	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new Wort("neu"), new Substantiv("Mantel"));
+	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu", "e"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -39,7 +39,7 @@ public class DeclinationTest {
 
 	@Test
 	public void constructsSimplePhrase() {
-		assertEquals("der neu Mantel", mantel.toString()); // Neteisingas
+		assertEquals("der neue Mantel", mantel.toString()); // Neteisingas
 	}
 
 	@Test
