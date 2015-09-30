@@ -3,7 +3,9 @@ package eu.vytenis.grammars.de;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -45,16 +47,20 @@ public class DeclinationTest {
 	@Test
 	public void declinesDenNeuenMantel() {
 		assertEquals(4, declineMantel().size());
-		assertEquals("der neue Mantel", declineMantel().get(0));
-		assertEquals("des neuen Mantels", declineMantel().get(1));
-		assertEquals("dem neuen Mantel", declineMantel().get(2));
-		assertEquals("den neuen Mantel", declineMantel().get(3));
+		assertEquals("der neue Mantel", declineMantel(Kasus.Nominativ));
+		assertEquals("des neuen Mantels", declineMantel(Kasus.Genitiv));
+		assertEquals("dem neuen Mantel", declineMantel(Kasus.Dativ));
+		assertEquals("den neuen Mantel", declineMantel(Kasus.Akkusativ));
 	}
 
-	private List<String> declineMantel() {
-		List<String> r = new ArrayList<String>();
+	private String declineMantel(Kasus kasus) {
+		return declineMantel().get(kasus);
+	}
+
+	private Map<Kasus, String> declineMantel() {
+		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
-			r.add(declineBestimmte(mantel, k));
+			r.put(k, declineBestimmte(mantel, k));
 		return r;
 	}
 
