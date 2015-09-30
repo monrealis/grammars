@@ -47,6 +47,8 @@ public class DeclinationTest {
 		assertEquals(4, declineMantel().size());
 		assertEquals("der neue Mantel", declineMantel().get(0));
 		assertEquals("des neuen Mantels", declineMantel().get(1));
+		assertEquals("dem neuen Mantel", declineMantel().get(2));
+		assertEquals("den neuen Mantel", declineMantel().get(3));
 	}
 
 	private List<String> declineMantel() {
@@ -54,7 +56,6 @@ public class DeclinationTest {
 		for (Kasus k : Kasus.values())
 			r.add(declineBestimmte(mantel, k));
 		return r;
-
 	}
 
 	private String declineBestimmte(Phrase phrase, Kasus k) {

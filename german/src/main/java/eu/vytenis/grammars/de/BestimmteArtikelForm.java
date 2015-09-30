@@ -8,7 +8,7 @@ import java.util.Map;
 
 import lombok.Getter;
 
-public class BestimmteArtikelForm {
+public class BestimmteArtikelForm implements Part {
 	private static Map<List<Object>, String> strings = createValues();
 
 	private static Map<List<Object>, String> createValues() {
