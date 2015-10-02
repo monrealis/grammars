@@ -14,10 +14,6 @@ public class Decliner {
 
 	public String decline() {
 		List<Part> w = new ArrayList<Part>();
-		// if (kasus == Kasus.Nominativ)
-		// w.add(BestimmteArtikel.Der);
-		// else if (kasus == Kasus.Genitiv)
-		// w.add(new Wort("des"));
 		w.add(new BestimmteArtikelForm(BestimmteArtikel.Der, kasus));
 		AdjektivForm adj = (AdjektivForm) phrase.getWords().get(1);
 		if (kasus == Kasus.Nominativ)
@@ -25,7 +21,6 @@ public class Decliner {
 		else
 			w.add(adj.withEnding("en"));
 		Substantiv noun = (Substantiv) phrase.getWords().get(2);
-
 		if (kasus == Kasus.Genitiv)
 			w.add(new Wort(noun.toString()).withEnding("s"));
 		else
