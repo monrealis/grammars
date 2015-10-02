@@ -52,15 +52,22 @@ public class StructureParser {
 			strings.add(o.toString());
 		return strings;
 	}
+	
+	public Part getOne(Phrase p, String regexp, String groupName) {
+		List<Part> parts = get(p, regexp, groupName);
+		if (parts.size() != 1)
+			throw new IllegalArgumentException();
+		return parts.iterator().next();
+	}
 
 	// TODO refactor
-	public List<Object> get(Phrase p, String regexp, String groupName) {
+	public List<Part> get(Phrase p, String regexp, String groupName) {
 		Matcher m = matchingMatcher(p, regexp);
 		int s = m.start(groupName);
 		int e = m.end(groupName);
 		int numberOfCapitalsBefore = getNumberOfCapitalLetters(m.group(), 0, s);
 		int numberOfCapitalsInside = getNumberOfCapitalLetters(m.group(), s, e);
-		return new ArrayList<Object>(p.getWords().subList(numberOfCapitalsBefore, numberOfCapitalsBefore + numberOfCapitalsInside));
+		return new ArrayList<Part>(p.getWords().subList(numberOfCapitalsBefore, numberOfCapitalsBefore + numberOfCapitalsInside));
 	}
 
 	private int getNumberOfCapitalLetters(String group, int from, int to) {

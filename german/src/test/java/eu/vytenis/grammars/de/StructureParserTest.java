@@ -1,8 +1,11 @@
 package eu.vytenis.grammars.de;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -45,9 +48,30 @@ public class StructureParserTest {
 	}
 
 	@Test
+	public void getOneReturnsSameAsGet() {
+		String regexp = "(?<D>Der)(?<A>A)(?<S>S)";
+		assertEquals(asList(getOne(regexp, "A")), get(regexp, "A"));
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void getOneFailsIfNotOnePart() {
+		phrase = phrase2Adj;
+		String regexp = "(?<D>Der)(?<A>A)(?<S>S)";
+		getOne(regexp, "A");
+	}
+
+	@Test
 	public void getsTwoAdjectives() {
 		phrase = phrase2Adj;
 		assertEquals("neu rot", getAsString("(?<D>Der)(?<A>A+)(?<S>S)", "A"));
+	}
+
+	private List<Part> get(String regexp, String groupName) {
+		return parser.get(phrase, regexp, groupName);
+	}
+
+	private Part getOne(String regexp, String groupName) {
+		return parser.getOne(phrase, regexp, groupName);
 	}
 
 	private String getAsString(String regexp, String groupName) {
