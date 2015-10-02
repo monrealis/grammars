@@ -1,6 +1,7 @@
 package eu.vytenis.grammars.de;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -42,6 +43,14 @@ public class DeclinationTest {
 	@Test
 	public void constructsSimplePhrase() {
 		assertEquals("der neue Mantel", mantel.toString()); // Neteisingas
+	}
+
+	@Test
+	public void parseStructure() {
+		StructureParser p = new StructureParser();
+		assertEquals("DerAS", p.parse(mantel));
+		assertTrue(p.matches(mantel, "Der(A*)S"));
+		assertEquals("neue", p.get(mantel, "Der(?<A>A*)S", "A").iterator().next().toString());
 	}
 
 	@Test

@@ -19,6 +19,8 @@ public class StructureParser {
 			return "Der";
 		if (o instanceof Adjektiv)
 			return "A";
+		if (o instanceof AdjektivForm)
+			return "A";
 		if (o instanceof Substantiv)
 			return "S";
 		throw new IllegalArgumentException(o.toString());
