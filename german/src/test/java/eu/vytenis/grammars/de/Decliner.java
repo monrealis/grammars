@@ -6,6 +6,8 @@ import java.util.List;
 public class Decliner {
 	private final Phrase phrase;
 	private final Kasus kasus;
+	private final StructureParser parser = new StructureParser();
+	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
 		this.phrase = phrase;
@@ -13,18 +15,21 @@ public class Decliner {
 	}
 
 	public String decline() {
-		List<Part> w = new ArrayList<Part>();
-		w.add(new BestimmteArtikelForm(BestimmteArtikel.Der, kasus));
+		String re = "(?<Der>Der)(?<A>A*)(?<S>S)";
+		if (!parser.matches(phrase, re))
+			throw new IllegalStateException();
+		BestimmteArtikel der = (BestimmteArtikel) parser.getOne(phrase, re, "Der");
+		words.add(new BestimmteArtikelForm(der, kasus));
 		AdjektivForm adj = (AdjektivForm) phrase.getWords().get(1);
 		if (kasus == Kasus.Nominativ)
-			w.add(adj.withEnding("e"));
+			words.add(adj.withEnding("e"));
 		else
-			w.add(adj.withEnding("en"));
+			words.add(adj.withEnding("en"));
 		Substantiv noun = (Substantiv) phrase.getWords().get(2);
 		if (kasus == Kasus.Genitiv)
-			w.add(new Wort(noun.toString()).withEnding("s"));
+			words.add(new Wort(noun.toString()).withEnding("s"));
 		else
-			w.add(noun);
-		return new Phrase(w.toArray(new Part[] {})).toString();
+			words.add(noun);
+		return new Phrase(words.toArray(new Part[] {})).toString();
 	}
 }
