@@ -47,10 +47,10 @@ public class DeclinationTest {
 
 	@Test
 	public void parseStructure() {
-		StructureParser p = new StructureParser();
-		assertEquals("DerAS", p.parse(mantel));
-		assertTrue(p.matches(mantel, "Der(A*)S"));
-		assertEquals("neue", p.get(mantel, "Der(?<A>A*)S", "A").iterator().next().toString());
+		StructureParser p = new StructureParser(mantel);
+		assertEquals("DerAS", p.parse());
+		assertTrue(p.matches("Der(A*)S"));
+		assertEquals("neue", p.get("Der(?<A>A*)S", "A").iterator().next().toString());
 	}
 
 	@Test

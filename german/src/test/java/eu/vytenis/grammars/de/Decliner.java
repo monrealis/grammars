@@ -6,19 +6,20 @@ import java.util.List;
 public class Decliner {
 	private final Phrase phrase;
 	private final Kasus kasus;
-	private final StructureParser parser = new StructureParser();
+	private final StructureParser parser;
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
 		this.phrase = phrase;
+		this.parser = new StructureParser(phrase);
 		this.kasus = kasus;
 	}
 
 	public String decline() {
 		String re = "(?<Der>Der)(?<A>A*)(?<S>S)";
-		if (!parser.matches(phrase, re))
+		if (!parser.matches(re))
 			throw new IllegalStateException();
-		BestimmteArtikel der = (BestimmteArtikel) parser.getOne(phrase, re, "Der");
+		BestimmteArtikel der = (BestimmteArtikel) parser.getOne(re, "Der");
 		words.add(new BestimmteArtikelForm(der, kasus));
 		AdjektivForm adj = (AdjektivForm) phrase.getWords().get(1);
 		if (kasus == Kasus.Nominativ)

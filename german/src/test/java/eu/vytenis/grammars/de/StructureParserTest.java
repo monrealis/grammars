@@ -10,33 +10,32 @@ import java.util.List;
 import org.junit.Test;
 
 public class StructureParserTest {
-	private StructureParser parser = new StructureParser();
 	private Phrase phrase = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu"), new Substantiv("Mantel"));
 	private Phrase phrase2Adj = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu"), new Adjektiv("rot"), new Substantiv("Mantel"));
 
 	@Test
-	public void parse() {
-		assertEquals("DerAS", parser.parse(phrase));
+	public void parses() {
+		assertEquals("DerAS", parse());
 	}
 
 	@Test
 	public void matchesWhole() {
-		assertTrue(parser.matches(phrase, "DerAS"));
+		assertTrue(parser().matches("DerAS"));
 	}
 
 	@Test
 	public void doesNotMatchPartially() {
-		assertFalse(parser.matches(phrase, "A"));
+		assertFalse(parser().matches("A"));
 	}
 
 	@Test
 	public void matchesWithGroups() {
-		assertTrue(parser.matches(phrase, "(Der)(A)(S)"));
+		assertTrue(parser().matches("(Der)(A)(S)"));
 	}
 
 	@Test
 	public void matchesWithNamedGroups() {
-		assertTrue(parser.matches(phrase, "(Der)(?<A>A)(S)"));
+		assertTrue(parser().matches("(Der)(?<A>A)(S)"));
 	}
 
 	@Test
@@ -66,15 +65,23 @@ public class StructureParserTest {
 		assertEquals("neu rot", getAsString("(?<D>Der)(?<A>A+)(?<S>S)", "A"));
 	}
 
+	private String parse() {
+		return parser().parse();
+	}
+
 	private List<Part> get(String regexp, String groupName) {
-		return parser.get(phrase, regexp, groupName);
+		return parser().get(regexp, groupName);
 	}
 
 	private Part getOne(String regexp, String groupName) {
-		return parser.getOne(phrase, regexp, groupName);
+		return parser().getOne(regexp, groupName);
 	}
 
 	private String getAsString(String regexp, String groupName) {
-		return parser.getAsString(phrase, regexp, groupName);
+		return parser().getAsString(regexp, groupName);
+	}
+
+	private StructureParser parser() {
+		return new StructureParser(phrase);
 	}
 }
