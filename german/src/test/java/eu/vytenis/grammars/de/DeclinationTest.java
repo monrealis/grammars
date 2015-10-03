@@ -8,11 +8,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
 	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu", "e"), new Substantiv("Mantel"));
+	@SuppressWarnings("unused")
+	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new AdjektivForm("neu", "er"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -62,8 +65,23 @@ public class DeclinationTest {
 		assertEquals("den neuen Mantel", declineMantel(Kasus.Akkusativ));
 	}
 
+	@Test
+	@Ignore
+	// Not prepared and implemented
+	public void declinesEinenNeuenMantel() {
+		assertEquals(4, declineMantel().size());
+		assertEquals("ein neuer Mantel", declineEinMantel(Kasus.Nominativ));
+		assertEquals("eines neuen Mantel", declineEinMantel(Kasus.Genitiv));
+		assertEquals("einem neuen Mantel", declineEinMantel(Kasus.Dativ));
+		assertEquals("einen neuen Mantel", declineEinMantel(Kasus.Akkusativ));
+	}
+
 	private String declineMantel(Kasus kasus) {
 		return declineMantel().get(kasus);
+	}
+
+	private String declineEinMantel(Kasus kasus) {
+		return "";
 	}
 
 	private Map<Kasus, String> declineMantel() {

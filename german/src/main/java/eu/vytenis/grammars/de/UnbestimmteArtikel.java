@@ -2,7 +2,7 @@ package eu.vytenis.grammars.de;
 
 import lombok.Getter;
 
-public enum UnbestimmteArtikel implements Artikel {
+public enum UnbestimmteArtikel implements Artikel, Part {
 	Ein(Geschlecht.Mannlich), Eine(Geschlecht.Weiblich), EinN(Geschlecht.Neutral);
 	@Getter
 	private final Geschlecht geschlecht;
