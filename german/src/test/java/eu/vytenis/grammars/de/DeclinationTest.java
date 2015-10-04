@@ -44,8 +44,9 @@ public class DeclinationTest {
 	}
 
 	@Test
-	public void constructsSimplePhrase() {
-		assertEquals("der neue Mantel", mantel.toString()); // Neteisingas
+	public void constructsSimplePhrases() {
+		assertEquals("der neue Mantel", mantel.toString());
+		assertEquals("ein neuer Mantel", einNeuerMantel.toString());
 	}
 
 	@Test
