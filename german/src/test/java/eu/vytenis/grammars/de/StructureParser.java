@@ -22,6 +22,8 @@ public class StructureParser {
 	private String abbreviate(Part o) {
 		if (o == BestimmteArtikel.Der)
 			return "Der";
+		if (o == UnbestimmteArtikel.Ein)
+			return "Ein";
 		if (o instanceof Adjektiv)
 			return "A";
 		if (o instanceof AdjektivForm)

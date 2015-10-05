@@ -8,13 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
 	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu", "e"), new Substantiv("Mantel"));
-	@SuppressWarnings("unused")
 	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new AdjektivForm("neu", "er"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
@@ -66,11 +64,10 @@ public class DeclinationTest {
 		assertEquals("den neuen Mantel", declineMantel(Kasus.Akkusativ));
 	}
 
-	@Test
-	@Ignore
+	@Test(expected = IllegalStateException.class)
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
-		assertEquals(4, declineMantel().size());
+		assertEquals(4, declineEinMantel().size());
 		assertEquals("ein neuer Mantel", declineEinMantel(Kasus.Nominativ));
 		assertEquals("eines neuen Mantel", declineEinMantel(Kasus.Genitiv));
 		assertEquals("einem neuen Mantel", declineEinMantel(Kasus.Dativ));
@@ -89,6 +86,13 @@ public class DeclinationTest {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
 			r.put(k, declineBestimmte(mantel, k));
+		return r;
+	}
+
+	private Map<Kasus, String> declineEinMantel() {
+		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
+		for (Kasus k : Kasus.values())
+			r.put(k, declineBestimmte(einNeuerMantel, k));
 		return r;
 	}
 
