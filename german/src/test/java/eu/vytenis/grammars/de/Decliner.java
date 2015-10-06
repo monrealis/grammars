@@ -16,11 +16,12 @@ public class Decliner {
 	}
 
 	public String decline() {
-		String re = "(?<Der>Der)(?<A>A*)(?<S>S)";
+		String re = "(?<Art>(?<Der>Der)|(?<Ein>Ein))(?<A>A*)(?<S>S)";
 		if (!parser.matches(re))
 			throw new IllegalStateException();
-		BestimmteArtikel der = (BestimmteArtikel) parser.getOne(re, "Der");
-		words.add(new BestimmteArtikelForm(der, kasus));
+		Artikel art = (Artikel) parser.getOne(re, "Art");
+		if (art instanceof BestimmteArtikel)
+			words.add(new BestimmteArtikelForm((BestimmteArtikel) art, kasus));
 		AdjektivForm adj = (AdjektivForm) phrase.getWords().get(1);
 		if (kasus == Kasus.Nominativ)
 			words.add(adj.withEnding("e"));

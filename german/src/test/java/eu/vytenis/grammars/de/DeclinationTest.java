@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
@@ -64,7 +65,8 @@ public class DeclinationTest {
 		assertEquals("den neuen Mantel", declineMantel(Kasus.Akkusativ));
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test
+	@Ignore
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinMantel().size());
@@ -79,24 +81,24 @@ public class DeclinationTest {
 	}
 
 	private String declineEinMantel(Kasus kasus) {
-		return "";
+		return declineEinMantel().get(kasus);
 	}
 
 	private Map<Kasus, String> declineMantel() {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
-			r.put(k, declineBestimmte(mantel, k));
+			r.put(k, decline(mantel, k));
 		return r;
 	}
 
 	private Map<Kasus, String> declineEinMantel() {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
-			r.put(k, declineBestimmte(einNeuerMantel, k));
+			r.put(k, decline(einNeuerMantel, k));
 		return r;
 	}
 
-	private String declineBestimmte(Phrase phrase, Kasus k) {
+	private String decline(Phrase phrase, Kasus k) {
 		return new Decliner(phrase, k).decline();
 	}
 }
