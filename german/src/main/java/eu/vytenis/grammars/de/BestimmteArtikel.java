@@ -11,6 +11,10 @@ public enum BestimmteArtikel implements Artikel, Part {
 		this.geschlecht = geschlecht;
 	}
 
+	public BestimmteArtikelForm withKasus(Kasus kasus) {
+		return new BestimmteArtikelForm(this, kasus);
+	}
+
 	@Override
 	public String toString() {
 		return name().toLowerCase();

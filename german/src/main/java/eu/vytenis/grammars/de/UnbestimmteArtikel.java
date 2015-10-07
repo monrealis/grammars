@@ -17,6 +17,11 @@ public enum UnbestimmteArtikel implements Artikel, Part {
 		this.geschlecht = geschlecht;
 		this.text = text;
 	}
+	
+	public UnbestimmteArtikelForm withKasus(Kasus kasus) {
+		return new UnbestimmteArtikelForm(this, kasus);
+	}
+
 
 	@Override
 	public String toString() {
