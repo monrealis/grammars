@@ -21,7 +21,7 @@ public class DeclinationTest {
 		texts.add("dem neuen Mantel");
 		texts.add("den neuen Mantel");
 		texts.add("ein neuer Mantel");
-		texts.add("eines neuen Mantel");
+		texts.add("eines neuen Mantel"); // Check
 		texts.add("einem neuen Mantel");
 		texts.add("einen neuen Mantel");
 		texts.add("die neue Bluse");
