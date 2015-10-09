@@ -21,7 +21,7 @@ public class DeclinationTest {
 		texts.add("dem neuen Mantel");
 		texts.add("den neuen Mantel");
 		texts.add("ein neuer Mantel");
-		texts.add("eines neuen Mantel"); // Check
+		texts.add("eines neuen Mantel");
 		texts.add("einem neuen Mantel");
 		texts.add("einen neuen Mantel");
 		texts.add("die neue Bluse");
@@ -71,7 +71,7 @@ public class DeclinationTest {
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinMantel().size());
 		assertEquals("ein neuer Mantel", declineEinMantel(Kasus.Nominativ));
-		assertEquals("eines neuen Mantel", declineEinMantel(Kasus.Genitiv));
+		assertEquals("eines neuen Mantels", declineEinMantel(Kasus.Genitiv));
 		assertEquals("einem neuen Mantel", declineEinMantel(Kasus.Dativ));
 		assertEquals("einen neuen Mantel", declineEinMantel(Kasus.Akkusativ));
 	}
