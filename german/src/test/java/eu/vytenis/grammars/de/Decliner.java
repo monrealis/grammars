@@ -21,7 +21,7 @@ public class Decliner {
 		if (isBestimmte())
 			words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
 		declineBestimmte();
-		return new Phrase(words.toArray(new Part[] {})).toString();
+		return new Phrase(words).toString();
 	}
 
 	private void declineBestimmte() {

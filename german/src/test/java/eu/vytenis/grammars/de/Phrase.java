@@ -4,13 +4,18 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Phrase {
-	private List<Part> words = new ArrayList<Part>();
+	private final List<Part> words;
 
 	public Phrase(Part... words) {
-		this.words.addAll(asList(words));
+		this(asList(words));
+	}
+
+	public <T extends Part> Phrase(Collection<T> words) {
+		this.words = new ArrayList<>(words);
 	}
 
 	@Override
