@@ -2,13 +2,13 @@ package eu.vytenis.grammars.de;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
@@ -66,10 +66,10 @@ public class DeclinationTest {
 	}
 
 	@Test
-	@Ignore
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinMantel().size());
+		assumeFalse(true);
 		assertEquals("ein neuer Mantel", declineEinMantel(Kasus.Nominativ));
 		assertEquals("eines neuen Mantels", declineEinMantel(Kasus.Genitiv));
 		assertEquals("einem neuen Mantel", declineEinMantel(Kasus.Dativ));
