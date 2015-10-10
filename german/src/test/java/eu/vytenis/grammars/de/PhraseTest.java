@@ -13,5 +13,4 @@ public class PhraseTest {
 	private Phrase derTisch() {
 		return new Phrase(BestimmteArtikel.Der, new Substantiv("Tisch"));
 	}
-
 }

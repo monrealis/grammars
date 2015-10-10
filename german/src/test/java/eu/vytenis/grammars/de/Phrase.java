@@ -2,6 +2,7 @@ package eu.vytenis.grammars.de;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,10 +21,7 @@ public class Phrase {
 
 	@Override
 	public String toString() {
-		List<String> s = new ArrayList<String>();
-		for (Object o : words)
-			s.add(o.toString());
-		return String.join(" ", s);
+		return String.join(" ", words.stream().map(w -> w.toString()).collect(toList()));
 	}
 
 	public List<Part> getWords() {
