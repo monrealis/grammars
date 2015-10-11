@@ -53,6 +53,6 @@ public class Decliner {
 	}
 
 	private Substantiv substantiv() {
-		return (Substantiv) phrase.getWords().get(2);
+		return (Substantiv) parser.getOne(expression, "S");
 	}
 }
