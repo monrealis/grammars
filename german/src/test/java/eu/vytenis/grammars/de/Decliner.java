@@ -29,11 +29,10 @@ public class Decliner {
 			words.add(adjektivForm().withEnding("e"));
 		else
 			words.add(adjektivForm().withEnding("en"));
-		Substantiv noun = (Substantiv) phrase.getWords().get(2);
 		if (kasus == Kasus.Genitiv)
-			words.add(new Wort(noun.toString()).withEnding("s"));
+			words.add(new Wort(substantiv().toString()).withEnding("s"));
 		else
-			words.add(noun);
+			words.add(substantiv());
 	}
 
 	private boolean isBestimmte() {
@@ -53,4 +52,7 @@ public class Decliner {
 		return (AdjektivForm) phrase.getWords().get(1);
 	}
 
+	private Substantiv substantiv() {
+		return (Substantiv) phrase.getWords().get(2);
+	}
 }
