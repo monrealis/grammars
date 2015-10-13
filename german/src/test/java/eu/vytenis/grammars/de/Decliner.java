@@ -1,5 +1,7 @@
 package eu.vytenis.grammars.de;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +28,9 @@ public class Decliner {
 
 	private void declineBestimmte() {
 		if (kasus == Kasus.Nominativ)
-			words.add(adjektivForm().withEnding("e"));
+			words.addAll(adjektivForms().stream().map(a -> a.withEnding("e")).collect(toList()));
 		else
-			words.add(adjektivForm().withEnding("en"));
+			words.addAll(adjektivForms().stream().map(a -> a.withEnding("en")).collect(toList()));
 		if (kasus == Kasus.Genitiv)
 			words.add(new Wort(substantiv().toString()).withEnding("s"));
 		else
@@ -48,8 +50,8 @@ public class Decliner {
 		return (Artikel) parser.getOne(expression, "Art");
 	}
 
-	private AdjektivForm adjektivForm() {
-		return (AdjektivForm) phrase.getWords().get(1);
+	private List<AdjektivForm> adjektivForms() {
+		return parser.get(expression, "A").stream().map(a -> (AdjektivForm) a).collect(toList());
 	}
 
 	private Substantiv substantiv() {

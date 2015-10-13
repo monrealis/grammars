@@ -3,6 +3,7 @@ package eu.vytenis.grammars.de;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,6 +15,7 @@ import org.junit.Test;
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
 	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu", "e"), new Substantiv("Mantel"));
+	private Phrase derMantel = new Phrase(BestimmteArtikel.Der, new Substantiv("Mantel"));
 	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new AdjektivForm("neu", "er"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
@@ -66,6 +68,15 @@ public class DeclinationTest {
 	}
 
 	@Test
+	public void declinesDenMantel() {
+		assertEquals(4, declineDenMantel().size());
+		assertEquals("der Mantel", declineDenMantel(Kasus.Nominativ));
+		assertEquals("des Mantels", declineDenMantel(Kasus.Genitiv));
+		assertEquals("dem Mantel", declineDenMantel(Kasus.Dativ));
+		assertEquals("den Mantel", declineDenMantel(Kasus.Akkusativ));
+	}
+
+	@Test
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinMantel().size());
@@ -82,6 +93,17 @@ public class DeclinationTest {
 
 	private String declineEinMantel(Kasus kasus) {
 		return declineEinMantel().get(kasus);
+	}
+
+	private String declineDenMantel(Kasus kasus) {
+		return declineDenMantel().get(kasus);
+	}
+
+	private Map<Kasus, String> declineDenMantel() {
+		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
+		for (Kasus k : Kasus.values())
+			r.put(k, decline(derMantel, k));
+		return r;
 	}
 
 	private Map<Kasus, String> declineMantel() {
