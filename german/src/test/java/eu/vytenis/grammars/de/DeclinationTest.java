@@ -3,7 +3,6 @@ package eu.vytenis.grammars.de;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -79,7 +78,7 @@ public class DeclinationTest {
 	@Test
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
-		assertEquals(4, declineEinMantel().size());
+		assertEquals(4, declineEinNeuenMantel().size());
 		assumeFalse(true);
 		assertEquals("ein neuer Mantel", declineEinMantel(Kasus.Nominativ));
 		assertEquals("eines neuen Mantels", declineEinMantel(Kasus.Genitiv));
@@ -92,7 +91,7 @@ public class DeclinationTest {
 	}
 
 	private String declineEinMantel(Kasus kasus) {
-		return declineEinMantel().get(kasus);
+		return declineEinNeuenMantel().get(kasus);
 	}
 
 	private String declineDenMantel(Kasus kasus) {
@@ -113,7 +112,7 @@ public class DeclinationTest {
 		return r;
 	}
 
-	private Map<Kasus, String> declineEinMantel() {
+	private Map<Kasus, String> declineEinNeuenMantel() {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
 			r.put(k, decline(einNeuerMantel, k));
