@@ -22,7 +22,11 @@ public class Decliner {
 		ensureMatches();
 		if (isBestimmte())
 			words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
+		else
+			words.add(new UnbestimmteArtikelForm((UnbestimmteArtikel) artikel(), kasus));
+
 		declineBestimmte();
+		declineSubstantiv();
 		return new Phrase(words).toString();
 	}
 
@@ -31,6 +35,9 @@ public class Decliner {
 			words.addAll(adjektivForms().stream().map(a -> a.withEnding("e")).collect(toList()));
 		else
 			words.addAll(adjektivForms().stream().map(a -> a.withEnding("en")).collect(toList()));
+	}
+
+	private void declineSubstantiv() {
 		if (kasus == Kasus.Genitiv)
 			words.add(new Wort(substantiv().toString()).withEnding("s"));
 		else
