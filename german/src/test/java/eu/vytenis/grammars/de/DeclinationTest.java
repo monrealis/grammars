@@ -15,6 +15,7 @@ public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
 	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
 	private Phrase derMantel = new Phrase(BestimmteArtikel.Der, new Substantiv("Mantel"));
+	private Phrase einMantel = new Phrase(UnbestimmteArtikel.Ein, new Substantiv("Mantel"));
 	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
@@ -76,6 +77,15 @@ public class DeclinationTest {
 	}
 
 	@Test
+	public void declinesEinMantel() {
+		assertEquals(4, declineEinMantel().size());
+		assertEquals("ein Mantel", declineEinMantel(Kasus.Nominativ));
+		assertEquals("eines Mantels", declineEinMantel(Kasus.Genitiv));
+		assertEquals("einem Mantel", declineEinMantel(Kasus.Dativ));
+		assertEquals("einen Mantel", declineEinMantel(Kasus.Akkusativ));
+	}
+
+	@Test
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinNeuenMantel().size());
@@ -91,7 +101,7 @@ public class DeclinationTest {
 	}
 
 	private String declineEinMantel(Kasus kasus) {
-		return declineEinNeuenMantel().get(kasus);
+		return declineEinMantel().get(kasus);
 	}
 
 	private String declineDenMantel(Kasus kasus) {
@@ -102,6 +112,13 @@ public class DeclinationTest {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
 			r.put(k, decline(derMantel, k));
+		return r;
+	}
+
+	private Map<Kasus, String> declineEinMantel() {
+		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
+		for (Kasus k : Kasus.values())
+			r.put(k, decline(einMantel, k));
 		return r;
 	}
 
