@@ -57,8 +57,8 @@ public class Decliner {
 		return (Artikel) parser.getOne(expression, "Art");
 	}
 
-	private List<AdjektivForm> adjektivForms() {
-		return parser.get(expression, "A").stream().map(a -> (AdjektivForm) a).collect(toList());
+	private List<Adjektiv> adjektivForms() {
+		return parser.get(expression, "A").stream().map(a -> (Adjektiv) a).collect(toList());
 	}
 
 	private Substantiv substantiv() {

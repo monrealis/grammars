@@ -10,8 +10,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class StructureParserTest {
-	private Phrase phrase = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu"), new Substantiv("Mantel"));
-	private Phrase phrase2Adj = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu"), new AdjektivForm("rot"), new Substantiv("Mantel"));
+	private Phrase phrase = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu"), new Substantiv("Mantel"));
+	private Phrase phrase2Adj = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu"), new Adjektiv("rot"), new Substantiv("Mantel"));
 
 	@Test
 	public void parses() {

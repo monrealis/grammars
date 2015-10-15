@@ -24,7 +24,7 @@ public class StructureParser {
 			return "Der";
 		if (o == UnbestimmteArtikel.Ein)
 			return "Ein";
-		if (o instanceof AdjektivForm)
+		if (o instanceof Adjektiv)
 			return "A";
 		if (o instanceof Substantiv)
 			return "S";

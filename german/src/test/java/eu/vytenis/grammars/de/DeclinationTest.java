@@ -13,9 +13,9 @@ import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
-	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new AdjektivForm("neu", "e"), new Substantiv("Mantel"));
+	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
 	private Phrase derMantel = new Phrase(BestimmteArtikel.Der, new Substantiv("Mantel"));
-	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new AdjektivForm("neu", "er"), new Substantiv("Mantel"));
+	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
