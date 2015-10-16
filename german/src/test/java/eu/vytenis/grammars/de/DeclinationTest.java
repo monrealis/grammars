@@ -109,30 +109,25 @@ public class DeclinationTest {
 	}
 
 	private Map<Kasus, String> declineDenMantel() {
-		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
-		for (Kasus k : Kasus.values())
-			r.put(k, decline(derMantel, k));
-		return r;
+		return decline(derMantel);
 	}
 
 	private Map<Kasus, String> declineEinMantel() {
-		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
-		for (Kasus k : Kasus.values())
-			r.put(k, decline(einMantel, k));
-		return r;
+		return decline(einMantel);
 	}
 
 	private Map<Kasus, String> declineMantel() {
-		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
-		for (Kasus k : Kasus.values())
-			r.put(k, decline(mantel, k));
-		return r;
+		return decline(mantel);
 	}
 
 	private Map<Kasus, String> declineEinNeuenMantel() {
+		return decline(einNeuerMantel);
+	}
+
+	private Map<Kasus, String> decline(Phrase phrase) {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
 		for (Kasus k : Kasus.values())
-			r.put(k, decline(einNeuerMantel, k));
+			r.put(k, decline(phrase, k));
 		return r;
 	}
 
