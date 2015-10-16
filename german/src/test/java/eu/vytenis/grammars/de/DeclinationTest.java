@@ -1,5 +1,6 @@
 package eu.vytenis.grammars.de;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
@@ -126,8 +127,7 @@ public class DeclinationTest {
 
 	private Map<Kasus, String> decline(Phrase phrase) {
 		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
-		for (Kasus k : Kasus.values())
-			r.put(k, decline(phrase, k));
+		asList(Kasus.values()).forEach(k -> r.put(k, decline(phrase, k)));
 		return r;
 	}
 
