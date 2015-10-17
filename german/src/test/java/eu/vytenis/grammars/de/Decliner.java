@@ -32,12 +32,15 @@ public class Decliner {
 	private void declineBestimmte() {
 		if (isBestimmte()) {
 			if (kasus == Kasus.Nominativ)
-				words.addAll(adjektivForms().stream().map(a -> a.withEnding("e")).collect(toList()));
+				words.addAll(changeAdjektiveEndings("e"));
 			else
-				words.addAll(adjektivForms().stream().map(a -> a.withEnding("en")).collect(toList()));
-		} else {
-			words.addAll(adjektivForms().stream().map(a -> a.withEnding("er")).collect(toList()));
-		}
+				words.addAll(changeAdjektiveEndings("en"));
+		} else
+			words.addAll(changeAdjektiveEndings("er"));
+	}
+
+	private List<Adjektiv> changeAdjektiveEndings(String ending) {
+		return adjektivForms().stream().map(a -> a.withEnding(ending)).collect(toList());
 	}
 
 	private void declineSubstantiv() {
