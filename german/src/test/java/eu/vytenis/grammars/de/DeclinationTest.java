@@ -90,11 +90,11 @@ public class DeclinationTest {
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinNeuenMantel().size());
+		assertEquals("ein neuer Mantel", declineEinNeuenMantel(Kasus.Nominativ));
 		assumeFalse(true);
-		assertEquals("ein neuer Mantel", declineEinMantel(Kasus.Nominativ));
-		assertEquals("eines neuen Mantels", declineEinMantel(Kasus.Genitiv));
-		assertEquals("einem neuen Mantel", declineEinMantel(Kasus.Dativ));
-		assertEquals("einen neuen Mantel", declineEinMantel(Kasus.Akkusativ));
+		assertEquals("eines neuen Mantels", declineEinNeuenMantel(Kasus.Genitiv));
+		assertEquals("einem neuen Mantel", declineEinNeuenMantel(Kasus.Dativ));
+		assertEquals("einen neuen Mantel", declineEinNeuenMantel(Kasus.Akkusativ));
 	}
 
 	private String declineMantel(Kasus kasus) {
@@ -107,6 +107,10 @@ public class DeclinationTest {
 
 	private String declineDenMantel(Kasus kasus) {
 		return declineDenMantel().get(kasus);
+	}
+
+	private String declineEinNeuenMantel(Kasus kasus) {
+		return declineEinNeuenMantel().get(kasus);
 	}
 
 	private Map<Kasus, String> declineDenMantel() {

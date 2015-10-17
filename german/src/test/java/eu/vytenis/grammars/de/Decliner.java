@@ -24,17 +24,20 @@ public class Decliner {
 			words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
 		else
 			words.add(new UnbestimmteArtikelForm((UnbestimmteArtikel) artikel(), kasus));
-
 		declineBestimmte();
 		declineSubstantiv();
 		return new Phrase(words).toString();
 	}
 
 	private void declineBestimmte() {
-		if (kasus == Kasus.Nominativ)
-			words.addAll(adjektivForms().stream().map(a -> a.withEnding("e")).collect(toList()));
-		else
-			words.addAll(adjektivForms().stream().map(a -> a.withEnding("en")).collect(toList()));
+		if (isBestimmte()) {
+			if (kasus == Kasus.Nominativ)
+				words.addAll(adjektivForms().stream().map(a -> a.withEnding("e")).collect(toList()));
+			else
+				words.addAll(adjektivForms().stream().map(a -> a.withEnding("en")).collect(toList()));
+		} else {
+			words.addAll(adjektivForms().stream().map(a -> a.withEnding("er")).collect(toList()));
+		}
 	}
 
 	private void declineSubstantiv() {
