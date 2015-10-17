@@ -30,13 +30,16 @@ public class Decliner {
 	}
 
 	private void declineBestimmte() {
-		if (isBestimmte()) {
-			if (kasus == Kasus.Nominativ)
-				words.addAll(changeAdjektiveEndings("e"));
-			else
-				words.addAll(changeAdjektiveEndings("en"));
-		} else
-			words.addAll(changeAdjektiveEndings("er"));
+		words.addAll(changeAdjektiveEndings(getAdjektivEnding()));
+	}
+
+	private String getAdjektivEnding() {
+		if (isBestimmte() && kasus == Kasus.Nominativ)
+			return "e";
+		else if (isBestimmte())
+			return "en";
+		else
+			return "er";
 	}
 
 	private List<Adjektiv> changeAdjektiveEndings(String ending) {
