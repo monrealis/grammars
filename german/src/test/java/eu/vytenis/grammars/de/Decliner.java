@@ -38,8 +38,10 @@ public class Decliner {
 			return "e";
 		else if (isBestimmte())
 			return "en";
-		else
+		else if (kasus == Kasus.Nominativ)
 			return "er";
+		else
+			return "en";
 	}
 
 	private List<Adjektiv> changeAdjektiveEndings(String ending) {

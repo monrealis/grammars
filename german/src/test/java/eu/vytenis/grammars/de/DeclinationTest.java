@@ -91,7 +91,6 @@ public class DeclinationTest {
 	public void declinesEinenNeuenMantel() {
 		assertEquals(4, declineEinNeuenMantel().size());
 		assertEquals("ein neuer Mantel", declineEinNeuenMantel(Kasus.Nominativ));
-		assumeFalse(true);
 		assertEquals("eines neuen Mantels", declineEinNeuenMantel(Kasus.Genitiv));
 		assertEquals("einem neuen Mantel", declineEinNeuenMantel(Kasus.Dativ));
 		assertEquals("einen neuen Mantel", declineEinNeuenMantel(Kasus.Akkusativ));
