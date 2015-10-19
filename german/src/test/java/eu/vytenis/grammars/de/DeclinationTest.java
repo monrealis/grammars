@@ -3,7 +3,6 @@ package eu.vytenis.grammars.de;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeFalse;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,6 +17,7 @@ public class DeclinationTest {
 	private Phrase derMantel = new Phrase(BestimmteArtikel.Der, new Substantiv("Mantel"));
 	private Phrase einMantel = new Phrase(UnbestimmteArtikel.Ein, new Substantiv("Mantel"));
 	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
+	private Phrase dieBluse = new Phrase(BestimmteArtikel.Die, new Substantiv("Bluse"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -96,6 +96,15 @@ public class DeclinationTest {
 		assertEquals("einen neuen Mantel", declineEinNeuenMantel(Kasus.Akkusativ));
 	}
 
+	@Test
+	public void declinesDieBluse() {
+		assertEquals(4, declineDieBluse().size());
+		assertEquals("die Bluse", declineDieBluse(Kasus.Nominativ));
+		assertEquals("der Bluse", declineDieBluse(Kasus.Genitiv));
+		assertEquals("der Bluse", declineDieBluse(Kasus.Dativ));
+		assertEquals("die Bluse", declineDieBluse(Kasus.Akkusativ));
+	}
+
 	private String declineMantel(Kasus kasus) {
 		return declineMantel().get(kasus);
 	}
@@ -112,6 +121,10 @@ public class DeclinationTest {
 		return declineEinNeuenMantel().get(kasus);
 	}
 
+	private String declineDieBluse(Kasus kasus) {
+		return declineDieBluse().get(kasus);
+	}
+
 	private Map<Kasus, String> declineDenMantel() {
 		return decline(derMantel);
 	}
@@ -126,6 +139,10 @@ public class DeclinationTest {
 
 	private Map<Kasus, String> declineEinNeuenMantel() {
 		return decline(einNeuerMantel);
+	}
+
+	private Map<Kasus, String> declineDieBluse() {
+		return decline(dieBluse);
 	}
 
 	private Map<Kasus, String> decline(Phrase phrase) {
