@@ -61,7 +61,6 @@ public class DeclinationTest {
 
 	@Test
 	public void declinesDenNeuenMantel() {
-		assertEquals(4, declineMantel().size());
 		assertEquals("der neue Mantel", declineMantel(Kasus.Nominativ));
 		assertEquals("des neuen Mantels", declineMantel(Kasus.Genitiv));
 		assertEquals("dem neuen Mantel", declineMantel(Kasus.Dativ));
@@ -70,7 +69,6 @@ public class DeclinationTest {
 
 	@Test
 	public void declinesDenMantel() {
-		assertEquals(4, declineDenMantel().size());
 		assertEquals("der Mantel", declineDenMantel(Kasus.Nominativ));
 		assertEquals("des Mantels", declineDenMantel(Kasus.Genitiv));
 		assertEquals("dem Mantel", declineDenMantel(Kasus.Dativ));
@@ -79,7 +77,6 @@ public class DeclinationTest {
 
 	@Test
 	public void declinesEinMantel() {
-		assertEquals(4, declineEinMantel().size());
 		assertEquals("ein Mantel", declineEinMantel(Kasus.Nominativ));
 		assertEquals("eines Mantels", declineEinMantel(Kasus.Genitiv));
 		assertEquals("einem Mantel", declineEinMantel(Kasus.Dativ));
@@ -89,7 +86,6 @@ public class DeclinationTest {
 	@Test
 	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
-		assertEquals(4, declineEinNeuenMantel().size());
 		assertEquals("ein neuer Mantel", declineEinNeuenMantel(Kasus.Nominativ));
 		assertEquals("eines neuen Mantels", declineEinNeuenMantel(Kasus.Genitiv));
 		assertEquals("einem neuen Mantel", declineEinNeuenMantel(Kasus.Dativ));
@@ -98,7 +94,6 @@ public class DeclinationTest {
 
 	@Test
 	public void declinesDieBluse() {
-		assertEquals(4, declineDieBluse().size());
 		assertEquals("die Bluse", declineDieBluse(Kasus.Nominativ));
 		assertEquals("der Bluse", declineDieBluse(Kasus.Genitiv));
 		assertEquals("der Bluse", declineDieBluse(Kasus.Dativ));
