@@ -36,6 +36,8 @@ public class Decliner {
 	private String getAdjektivEnding() {
 		if (isBestimmte() && kasus == Kasus.Nominativ)
 			return "e";
+		else if (isBestimmte() && isWeiblich() && kasus == Kasus.Akkusativ)
+			return "e";
 		else if (isBestimmte())
 			return "en";
 		else if (kasus == Kasus.Nominativ)

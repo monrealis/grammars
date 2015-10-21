@@ -1,13 +1,10 @@
 package eu.vytenis.grammars.de;
 
-import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
@@ -18,6 +15,7 @@ public class DeclinationTest {
 	private Phrase einMantel = new Phrase(UnbestimmteArtikel.Ein, new Substantiv("Mantel"));
 	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
 	private Phrase dieBluse = new Phrase(BestimmteArtikel.Die, new Substantiv("Bluse"));
+	private Phrase dieNeueBluse = new Phrase(BestimmteArtikel.Die, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -84,7 +82,6 @@ public class DeclinationTest {
 	}
 
 	@Test
-	// Not prepared and implemented
 	public void declinesEinenNeuenMantel() {
 		assertEquals("ein neuer Mantel", declineEinNeuenMantel(Kasus.Nominativ));
 		assertEquals("eines neuen Mantels", declineEinNeuenMantel(Kasus.Genitiv));
@@ -100,50 +97,36 @@ public class DeclinationTest {
 		assertEquals("die Bluse", declineDieBluse(Kasus.Akkusativ));
 	}
 
+	@Test
+	public void declinesDieNeueBluse() {
+		assertEquals("die neue Bluse", declineDieNeueBluse(Kasus.Nominativ));
+		assertEquals("der neuen Bluse", declineDieNeueBluse(Kasus.Genitiv));
+		assertEquals("der neuen Bluse", declineDieNeueBluse(Kasus.Dativ));
+		assertEquals("die neue Bluse", declineDieNeueBluse(Kasus.Akkusativ));
+	}
+
 	private String declineMantel(Kasus kasus) {
-		return declineMantel().get(kasus);
+		return decline(mantel, kasus);
 	}
 
 	private String declineEinMantel(Kasus kasus) {
-		return declineEinMantel().get(kasus);
+		return decline(einMantel, kasus);
 	}
 
 	private String declineDenMantel(Kasus kasus) {
-		return declineDenMantel().get(kasus);
+		return decline(derMantel, kasus);
 	}
 
 	private String declineEinNeuenMantel(Kasus kasus) {
-		return declineEinNeuenMantel().get(kasus);
+		return decline(einNeuerMantel, kasus);
 	}
 
 	private String declineDieBluse(Kasus kasus) {
-		return declineDieBluse().get(kasus);
+		return decline(dieBluse, kasus);
 	}
 
-	private Map<Kasus, String> declineDenMantel() {
-		return decline(derMantel);
-	}
-
-	private Map<Kasus, String> declineEinMantel() {
-		return decline(einMantel);
-	}
-
-	private Map<Kasus, String> declineMantel() {
-		return decline(mantel);
-	}
-
-	private Map<Kasus, String> declineEinNeuenMantel() {
-		return decline(einNeuerMantel);
-	}
-
-	private Map<Kasus, String> declineDieBluse() {
-		return decline(dieBluse);
-	}
-
-	private Map<Kasus, String> decline(Phrase phrase) {
-		Map<Kasus, String> r = new LinkedHashMap<Kasus, String>();
-		asList(Kasus.values()).forEach(k -> r.put(k, decline(phrase, k)));
-		return r;
+	private Object declineDieNeueBluse(Kasus kasus) {
+		return decline(dieNeueBluse, kasus);
 	}
 
 	private String decline(Phrase phrase, Kasus k) {
