@@ -9,7 +9,7 @@ public class Decliner {
 	private final Phrase phrase;
 	private final Kasus kasus;
 	private final StructureParser parser;
-	private final String expression = "(?<Art>(Der|Die)|(?<Ein>Ein))(?<A>A*)(?<S>S)";
+	private final String expression = "(?<Art>(Der|Die|Ein|Eine))(?<A>A*)(?<S>S)";
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
