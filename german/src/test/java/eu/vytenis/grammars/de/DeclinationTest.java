@@ -116,6 +116,14 @@ public class DeclinationTest {
 		assertEquals("eine Bluse", declineEineBluse(Kasus.Akkusativ));
 	}
 
+	@Test
+	public void declineEineNeueBluse() {
+		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Nominativ));
+		assertEquals("einer neuen Bluse", declineEineNeueBluse(Kasus.Genitiv));
+		assertEquals("einer neuen Bluse", declineEineNeueBluse(Kasus.Dativ));
+		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Akkusativ));
+	}
+
 	private String declineMantel(Kasus kasus) {
 		return decline(mantel, kasus);
 	}
@@ -142,6 +150,10 @@ public class DeclinationTest {
 
 	private String declineEineBluse(Kasus kasus) {
 		return decline(eineBluse, kasus);
+	}
+
+	private String declineEineNeueBluse(Kasus kasus) {
+		return decline(eineNeueBluse, kasus);
 	}
 
 	private String decline(Phrase phrase, Kasus k) {

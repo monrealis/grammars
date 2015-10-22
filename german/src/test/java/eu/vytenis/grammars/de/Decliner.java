@@ -40,7 +40,9 @@ public class Decliner {
 			return "e";
 		else if (isBestimmte())
 			return "en";
-		else if (kasus == Kasus.Nominativ)
+		else if (!isBestimmte() && isWeiblich() && (kasus == Kasus.Nominativ || kasus == Kasus.Akkusativ))
+			return "e";
+		else if (!isBestimmte() && kasus == Kasus.Nominativ)
 			return "er";
 		else
 			return "en";
