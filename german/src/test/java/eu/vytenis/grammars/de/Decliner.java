@@ -7,12 +7,12 @@ import java.util.List;
 
 public class Decliner {
 	private final Kasus kasus;
-	private final StructureParser parser;
-	private final String expression = "(?<Art>(Der|Die|Ein|Eine))(?<A>A*)(?<S>S)";
+	private final ExpressionParser parser;
+	private final String regexp = "(?<Art>(Der|Die|Ein|Eine))(?<A>A*)(?<S>S)";
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
-		this.parser = new StructureParser(phrase);
+		this.parser = new ExpressionParser(new StructureParser(phrase), regexp);
 		this.kasus = kasus;
 	}
 
@@ -62,7 +62,7 @@ public class Decliner {
 	}
 
 	private void ensureMatches() {
-		if (!parser.matches(expression))
+		if (!parser.matches())
 			throw new IllegalStateException();
 	}
 
@@ -75,14 +75,14 @@ public class Decliner {
 	}
 
 	private Artikel artikel() {
-		return (Artikel) parser.getOne(expression, "Art");
+		return (Artikel) parser.getOne("Art");
 	}
 
 	private List<Adjektiv> adjektivForms() {
-		return parser.get(expression, "A").stream().map(a -> (Adjektiv) a).collect(toList());
+		return parser.get("A").stream().map(a -> (Adjektiv) a).collect(toList());
 	}
 
 	private Substantiv substantiv() {
-		return (Substantiv) parser.getOne(expression, "S");
+		return (Substantiv) parser.getOne("S");
 	}
 }
