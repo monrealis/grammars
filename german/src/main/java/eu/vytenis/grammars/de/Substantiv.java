@@ -17,8 +17,8 @@ public class Substantiv implements Part {
 		this.ending = ending;
 	}
 
-	public Adjektiv withEnding(String ending) {
-		return new Adjektiv(substantiv, ending);
+	public Substantiv withEnding(String ending) {
+		return new Substantiv(substantiv, ending);
 	}
 
 	@Override

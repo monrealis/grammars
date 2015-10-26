@@ -52,7 +52,7 @@ public class Decliner {
 
 	private void declineSubstantiv() {
 		if (kasus == Kasus.Genitiv && !isWeiblich())
-			words.add(new Wort(substantiv().toString()).withEnding("s"));
+			words.add(substantiv().withEnding("s"));
 		else
 			words.add(substantiv());
 	}
