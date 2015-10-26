@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
@@ -18,6 +19,7 @@ public class DeclinationTest {
 	private Phrase dieNeueBluse = new Phrase(BestimmteArtikel.Die, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
 	private Phrase eineBluse = new Phrase(UnbestimmteArtikel.Eine, new Substantiv("Bluse"));
 	private Phrase eineNeueBluse = new Phrase(UnbestimmteArtikel.Eine, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
+	private Phrase einHemd = new Phrase(UnbestimmteArtikel.EinN, new Substantiv("Hemd"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -108,7 +110,7 @@ public class DeclinationTest {
 	}
 
 	@Test
-	public void declineEineBluse() {
+	public void declinesEineBluse() {
 		assertEquals("eine Bluse", declineEineBluse(Kasus.Nominativ));
 		assertEquals("einer Bluse", declineEineBluse(Kasus.Genitiv));
 		assertEquals("einer Bluse", declineEineBluse(Kasus.Dativ));
@@ -116,11 +118,20 @@ public class DeclinationTest {
 	}
 
 	@Test
-	public void declineEineNeueBluse() {
+	public void declinesEineNeueBluse() {
 		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Nominativ));
 		assertEquals("einer neuen Bluse", declineEineNeueBluse(Kasus.Genitiv));
 		assertEquals("einer neuen Bluse", declineEineNeueBluse(Kasus.Dativ));
 		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Akkusativ));
+	}
+
+	@Test
+	@Ignore
+	public void declinesEinNeuesHemd() {
+		assertEquals("ein Hemd", declineEinHemd(Kasus.Nominativ));
+		assertEquals("eines Hemdes", declineEinHemd(Kasus.Genitiv));
+		assertEquals("einem Hemd", declineEinHemd(Kasus.Dativ));
+		assertEquals("ein Hemd", declineEinHemd(Kasus.Akkusativ));
 	}
 
 	private String declineDenNeuenMantel(Kasus kasus) {
@@ -153,6 +164,10 @@ public class DeclinationTest {
 
 	private String declineEineNeueBluse(Kasus kasus) {
 		return decline(eineNeueBluse, kasus);
+	}
+
+	private String declineEinHemd(Kasus kasus) {
+		return decline(einHemd, kasus);
 	}
 
 	private String decline(Phrase phrase, Kasus k) {

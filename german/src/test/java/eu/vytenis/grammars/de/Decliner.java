@@ -8,7 +8,7 @@ import java.util.List;
 public class Decliner {
 	private final Kasus kasus;
 	private final ExpressionParser parser;
-	private final String regexp = "(?<Art>(Der|Die|Ein|Eine))(?<A>A*)(?<S>S)";
+	private final String regexp = "(?<Art>(Der|Die|Ein|Eine|Einn))(?<A>A*)(?<S>S)";
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {

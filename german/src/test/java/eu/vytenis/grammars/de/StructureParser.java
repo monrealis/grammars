@@ -28,6 +28,8 @@ public class StructureParser {
 			return "Ein";
 		if (o == UnbestimmteArtikel.Eine)
 			return "Eine";
+		if (o == UnbestimmteArtikel.EinN)
+			return "Einn";
 		if (o instanceof Adjektiv)
 			return "A";
 		if (o instanceof Substantiv)
