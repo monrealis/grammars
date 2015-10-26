@@ -10,14 +10,13 @@ import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
-	private Phrase mantel = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
+	private Phrase derNeueMantel = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
 	private Phrase derMantel = new Phrase(BestimmteArtikel.Der, new Substantiv("Mantel"));
 	private Phrase einMantel = new Phrase(UnbestimmteArtikel.Ein, new Substantiv("Mantel"));
 	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
 	private Phrase dieBluse = new Phrase(BestimmteArtikel.Die, new Substantiv("Bluse"));
 	private Phrase dieNeueBluse = new Phrase(BestimmteArtikel.Die, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
 	private Phrase eineBluse = new Phrase(UnbestimmteArtikel.Eine, new Substantiv("Bluse"));
-	@SuppressWarnings("unused")
 	private Phrase eineNeueBluse = new Phrase(UnbestimmteArtikel.Eine, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
 	static {
 		texts.add("der neue Mantel");
@@ -48,13 +47,13 @@ public class DeclinationTest {
 
 	@Test
 	public void constructsSimplePhrases() {
-		assertEquals("der neue Mantel", mantel.toString());
+		assertEquals("der neue Mantel", derNeueMantel.toString());
 		assertEquals("ein neuer Mantel", einNeuerMantel.toString());
 	}
 
 	@Test
 	public void parseStructure() {
-		StructureParser p = new StructureParser(mantel);
+		StructureParser p = new StructureParser(derNeueMantel);
 		assertEquals("DerAS", p.parse());
 		assertTrue(p.matches("Der(A*)S"));
 		assertEquals("neue", p.get("Der(?<A>A*)S", "A").iterator().next().toString());
@@ -62,10 +61,10 @@ public class DeclinationTest {
 
 	@Test
 	public void declinesDenNeuenMantel() {
-		assertEquals("der neue Mantel", declineMantel(Kasus.Nominativ));
-		assertEquals("des neuen Mantels", declineMantel(Kasus.Genitiv));
-		assertEquals("dem neuen Mantel", declineMantel(Kasus.Dativ));
-		assertEquals("den neuen Mantel", declineMantel(Kasus.Akkusativ));
+		assertEquals("der neue Mantel", declineDenNeuenMantel(Kasus.Nominativ));
+		assertEquals("des neuen Mantels", declineDenNeuenMantel(Kasus.Genitiv));
+		assertEquals("dem neuen Mantel", declineDenNeuenMantel(Kasus.Dativ));
+		assertEquals("den neuen Mantel", declineDenNeuenMantel(Kasus.Akkusativ));
 	}
 
 	@Test
@@ -124,8 +123,8 @@ public class DeclinationTest {
 		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Akkusativ));
 	}
 
-	private String declineMantel(Kasus kasus) {
-		return decline(mantel, kasus);
+	private String declineDenNeuenMantel(Kasus kasus) {
+		return decline(derNeueMantel, kasus);
 	}
 
 	private String declineEinMantel(Kasus kasus) {
