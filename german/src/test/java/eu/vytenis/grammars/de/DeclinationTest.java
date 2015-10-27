@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
@@ -126,7 +125,6 @@ public class DeclinationTest {
 	}
 
 	@Test
-	@Ignore
 	public void declinesEinNeuesHemd() {
 		assertEquals("ein Hemd", declineEinHemd(Kasus.Nominativ));
 		assertEquals("eines Hemdes", declineEinHemd(Kasus.Genitiv));
