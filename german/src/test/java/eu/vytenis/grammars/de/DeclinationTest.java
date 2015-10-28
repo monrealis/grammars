@@ -19,6 +19,7 @@ public class DeclinationTest {
 	private Phrase eineBluse = new Phrase(UnbestimmteArtikel.Eine, new Substantiv("Bluse"));
 	private Phrase eineNeueBluse = new Phrase(UnbestimmteArtikel.Eine, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
 	private Phrase einHemd = new Phrase(UnbestimmteArtikel.EinN, new Substantiv("Hemd"));
+	private Phrase dasHemd = new Phrase(BestimmteArtikel.Das, new Substantiv("Hemd"));
 	private Phrase dasNeueHemd = new Phrase(BestimmteArtikel.Das, new Adjektiv("neu", "e"), new Substantiv("Hemd"));
 	static {
 		texts.add("der neue Mantel");
@@ -141,6 +142,14 @@ public class DeclinationTest {
 		assertEquals("das neue Hemd", declineDasNeueHemd(Kasus.Akkusativ));
 	}
 
+	@Test
+	public void declinesDasHemd() {
+		assertEquals("das Hemd", declineDasHemd(Kasus.Nominativ));
+		assertEquals("des Hemdes", declineDasHemd(Kasus.Genitiv));
+		assertEquals("dem Hemd", declineDasHemd(Kasus.Dativ));
+		assertEquals("das Hemd", declineDasHemd(Kasus.Akkusativ));
+	}
+
 	private String declineDenNeuenMantel(Kasus kasus) {
 		return decline(derNeueMantel, kasus);
 	}
@@ -175,6 +184,10 @@ public class DeclinationTest {
 
 	private String declineEinHemd(Kasus kasus) {
 		return decline(einHemd, kasus);
+	}
+
+	private String declineDasHemd(Kasus kasus) {
+		return decline(dasHemd, kasus);
 	}
 
 	private String declineDasNeueHemd(Kasus kasus) {
