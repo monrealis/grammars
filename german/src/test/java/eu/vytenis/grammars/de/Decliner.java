@@ -8,7 +8,7 @@ import java.util.List;
 public class Decliner {
 	private final Kasus kasus;
 	private final ExpressionParser parser;
-	private final String regexp = "(?<Art>(Der|Die|Ein|Eine|Einn))(?<A>A*)(?<S>S)";
+	private final String regexp = "(?<Art>(Der|Die|Das|Ein|Eine|Einn))(?<A>A*)(?<S>S)";
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
@@ -34,7 +34,7 @@ public class Decliner {
 	private String getAdjektivEnding() {
 		if (isBestimmte() && kasus == Kasus.Nominativ)
 			return "e";
-		else if (isBestimmte() && isWeiblich() && kasus == Kasus.Akkusativ)
+		else if (isBestimmte() && !isMannlich() && kasus == Kasus.Akkusativ)
 			return "e";
 		else if (isBestimmte())
 			return "en";
@@ -77,6 +77,10 @@ public class Decliner {
 
 	private boolean isWeiblich() {
 		return getGesclecht().isWeiblich();
+	}
+
+	private boolean isMannlich() {
+		return getGesclecht().isMannlich();
 	}
 
 	private Geschlecht getGesclecht() {

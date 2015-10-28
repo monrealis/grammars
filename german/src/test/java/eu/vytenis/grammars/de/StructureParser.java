@@ -24,6 +24,8 @@ public class StructureParser {
 			return "Der";
 		if (o == BestimmteArtikel.Die)
 			return "Die";
+		if (o == BestimmteArtikel.Das)
+			return "Das";
 		if (o == UnbestimmteArtikel.Ein)
 			return "Ein";
 		if (o == UnbestimmteArtikel.Eine)
