@@ -40,8 +40,10 @@ public class Decliner {
 			return "en";
 		else if (!isBestimmte() && isWeiblich() && (kasus == Kasus.Nominativ || kasus == Kasus.Akkusativ))
 			return "e";
-		else if (!isBestimmte() && kasus == Kasus.Nominativ)
+		else if (!isBestimmte() && isMannlich() && kasus == Kasus.Nominativ)
 			return "er";
+		else if (!isBestimmte() & isNeutral() && (kasus == Kasus.Nominativ || kasus == Kasus.Akkusativ))
+			return "es";
 		else
 			return "en";
 	}
@@ -81,6 +83,9 @@ public class Decliner {
 
 	private boolean isMannlich() {
 		return getGesclecht().isMannlich();
+	}
+	private boolean isNeutral() {
+		return getGesclecht().isNeutral();
 	}
 
 	private Geschlecht getGesclecht() {

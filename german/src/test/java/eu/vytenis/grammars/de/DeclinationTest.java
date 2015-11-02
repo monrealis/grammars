@@ -1,5 +1,15 @@
 package eu.vytenis.grammars.de;
 
+import static eu.vytenis.grammars.de.BestimmteArtikel.Das;
+import static eu.vytenis.grammars.de.BestimmteArtikel.Der;
+import static eu.vytenis.grammars.de.BestimmteArtikel.Die;
+import static eu.vytenis.grammars.de.Kasus.Akkusativ;
+import static eu.vytenis.grammars.de.Kasus.Dativ;
+import static eu.vytenis.grammars.de.Kasus.Genitiv;
+import static eu.vytenis.grammars.de.Kasus.Nominativ;
+import static eu.vytenis.grammars.de.UnbestimmteArtikel.Ein;
+import static eu.vytenis.grammars.de.UnbestimmteArtikel.EinN;
+import static eu.vytenis.grammars.de.UnbestimmteArtikel.Eine;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -10,17 +20,18 @@ import org.junit.Test;
 
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
-	private Phrase derNeueMantel = new Phrase(BestimmteArtikel.Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
-	private Phrase derMantel = new Phrase(BestimmteArtikel.Der, new Substantiv("Mantel"));
-	private Phrase einMantel = new Phrase(UnbestimmteArtikel.Ein, new Substantiv("Mantel"));
-	private Phrase einNeuerMantel = new Phrase(UnbestimmteArtikel.Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
-	private Phrase dieBluse = new Phrase(BestimmteArtikel.Die, new Substantiv("Bluse"));
-	private Phrase dieNeueBluse = new Phrase(BestimmteArtikel.Die, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
-	private Phrase eineBluse = new Phrase(UnbestimmteArtikel.Eine, new Substantiv("Bluse"));
-	private Phrase eineNeueBluse = new Phrase(UnbestimmteArtikel.Eine, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
-	private Phrase einHemd = new Phrase(UnbestimmteArtikel.EinN, new Substantiv("Hemd"));
-	private Phrase dasHemd = new Phrase(BestimmteArtikel.Das, new Substantiv("Hemd"));
-	private Phrase dasNeueHemd = new Phrase(BestimmteArtikel.Das, new Adjektiv("neu", "e"), new Substantiv("Hemd"));
+	private Phrase derNeueMantel = new Phrase(Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
+	private Phrase derMantel = new Phrase(Der, new Substantiv("Mantel"));
+	private Phrase einMantel = new Phrase(Ein, new Substantiv("Mantel"));
+	private Phrase einNeuerMantel = new Phrase(Ein, new Adjektiv("neu", "er"), new Substantiv("Mantel"));
+	private Phrase dieBluse = new Phrase(Die, new Substantiv("Bluse"));
+	private Phrase dieNeueBluse = new Phrase(Die, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
+	private Phrase eineBluse = new Phrase(Eine, new Substantiv("Bluse"));
+	private Phrase eineNeueBluse = new Phrase(Eine, new Adjektiv("neu", "e"), new Substantiv("Bluse"));
+	private Phrase einHemd = new Phrase(EinN, new Substantiv("Hemd"));
+	private Phrase dasHemd = new Phrase(Das, new Substantiv("Hemd"));
+	private Phrase dasNeueHemd = new Phrase(Das, new Adjektiv("neu", "e"), new Substantiv("Hemd"));
+	private Phrase einNeuesHemd = new Phrase(EinN, new Adjektiv("neu", "es"), new Substantiv("Hemd"));
 	static {
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
@@ -64,90 +75,98 @@ public class DeclinationTest {
 
 	@Test
 	public void declinesDenNeuenMantel() {
-		assertEquals("der neue Mantel", declineDenNeuenMantel(Kasus.Nominativ));
-		assertEquals("des neuen Mantels", declineDenNeuenMantel(Kasus.Genitiv));
-		assertEquals("dem neuen Mantel", declineDenNeuenMantel(Kasus.Dativ));
-		assertEquals("den neuen Mantel", declineDenNeuenMantel(Kasus.Akkusativ));
+		assertEquals("der neue Mantel", declineDenNeuenMantel(Nominativ));
+		assertEquals("des neuen Mantels", declineDenNeuenMantel(Genitiv));
+		assertEquals("dem neuen Mantel", declineDenNeuenMantel(Dativ));
+		assertEquals("den neuen Mantel", declineDenNeuenMantel(Akkusativ));
 	}
 
 	@Test
 	public void declinesDenMantel() {
-		assertEquals("der Mantel", declineDenMantel(Kasus.Nominativ));
-		assertEquals("des Mantels", declineDenMantel(Kasus.Genitiv));
-		assertEquals("dem Mantel", declineDenMantel(Kasus.Dativ));
-		assertEquals("den Mantel", declineDenMantel(Kasus.Akkusativ));
+		assertEquals("der Mantel", declineDenMantel(Nominativ));
+		assertEquals("des Mantels", declineDenMantel(Genitiv));
+		assertEquals("dem Mantel", declineDenMantel(Dativ));
+		assertEquals("den Mantel", declineDenMantel(Akkusativ));
 	}
 
 	@Test
 	public void declinesEinMantel() {
-		assertEquals("ein Mantel", declineEinMantel(Kasus.Nominativ));
-		assertEquals("eines Mantels", declineEinMantel(Kasus.Genitiv));
-		assertEquals("einem Mantel", declineEinMantel(Kasus.Dativ));
-		assertEquals("einen Mantel", declineEinMantel(Kasus.Akkusativ));
+		assertEquals("ein Mantel", declineEinMantel(Nominativ));
+		assertEquals("eines Mantels", declineEinMantel(Genitiv));
+		assertEquals("einem Mantel", declineEinMantel(Dativ));
+		assertEquals("einen Mantel", declineEinMantel(Akkusativ));
 	}
 
 	@Test
 	public void declinesEinenNeuenMantel() {
-		assertEquals("ein neuer Mantel", declineEinNeuenMantel(Kasus.Nominativ));
-		assertEquals("eines neuen Mantels", declineEinNeuenMantel(Kasus.Genitiv));
-		assertEquals("einem neuen Mantel", declineEinNeuenMantel(Kasus.Dativ));
-		assertEquals("einen neuen Mantel", declineEinNeuenMantel(Kasus.Akkusativ));
+		assertEquals("ein neuer Mantel", declineEinNeuenMantel(Nominativ));
+		assertEquals("eines neuen Mantels", declineEinNeuenMantel(Genitiv));
+		assertEquals("einem neuen Mantel", declineEinNeuenMantel(Dativ));
+		assertEquals("einen neuen Mantel", declineEinNeuenMantel(Akkusativ));
 	}
 
 	@Test
 	public void declinesDieBluse() {
-		assertEquals("die Bluse", declineDieBluse(Kasus.Nominativ));
-		assertEquals("der Bluse", declineDieBluse(Kasus.Genitiv));
-		assertEquals("der Bluse", declineDieBluse(Kasus.Dativ));
-		assertEquals("die Bluse", declineDieBluse(Kasus.Akkusativ));
+		assertEquals("die Bluse", declineDieBluse(Nominativ));
+		assertEquals("der Bluse", declineDieBluse(Genitiv));
+		assertEquals("der Bluse", declineDieBluse(Dativ));
+		assertEquals("die Bluse", declineDieBluse(Akkusativ));
 	}
 
 	@Test
 	public void declinesDieNeueBluse() {
-		assertEquals("die neue Bluse", declineDieNeueBluse(Kasus.Nominativ));
-		assertEquals("der neuen Bluse", declineDieNeueBluse(Kasus.Genitiv));
-		assertEquals("der neuen Bluse", declineDieNeueBluse(Kasus.Dativ));
-		assertEquals("die neue Bluse", declineDieNeueBluse(Kasus.Akkusativ));
+		assertEquals("die neue Bluse", declineDieNeueBluse(Nominativ));
+		assertEquals("der neuen Bluse", declineDieNeueBluse(Genitiv));
+		assertEquals("der neuen Bluse", declineDieNeueBluse(Dativ));
+		assertEquals("die neue Bluse", declineDieNeueBluse(Akkusativ));
 	}
 
 	@Test
 	public void declinesEineBluse() {
-		assertEquals("eine Bluse", declineEineBluse(Kasus.Nominativ));
-		assertEquals("einer Bluse", declineEineBluse(Kasus.Genitiv));
-		assertEquals("einer Bluse", declineEineBluse(Kasus.Dativ));
-		assertEquals("eine Bluse", declineEineBluse(Kasus.Akkusativ));
+		assertEquals("eine Bluse", declineEineBluse(Nominativ));
+		assertEquals("einer Bluse", declineEineBluse(Genitiv));
+		assertEquals("einer Bluse", declineEineBluse(Dativ));
+		assertEquals("eine Bluse", declineEineBluse(Akkusativ));
 	}
 
 	@Test
 	public void declinesEineNeueBluse() {
-		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Nominativ));
-		assertEquals("einer neuen Bluse", declineEineNeueBluse(Kasus.Genitiv));
-		assertEquals("einer neuen Bluse", declineEineNeueBluse(Kasus.Dativ));
-		assertEquals("eine neue Bluse", declineEineNeueBluse(Kasus.Akkusativ));
+		assertEquals("eine neue Bluse", declineEineNeueBluse(Nominativ));
+		assertEquals("einer neuen Bluse", declineEineNeueBluse(Genitiv));
+		assertEquals("einer neuen Bluse", declineEineNeueBluse(Dativ));
+		assertEquals("eine neue Bluse", declineEineNeueBluse(Akkusativ));
+	}
+
+	@Test
+	public void declinesEinHemd() {
+		assertEquals("ein Hemd", declineEinHemd(Nominativ));
+		assertEquals("eines Hemdes", declineEinHemd(Genitiv));
+		assertEquals("einem Hemd", declineEinHemd(Dativ));
+		assertEquals("ein Hemd", declineEinHemd(Akkusativ));
 	}
 
 	@Test
 	public void declinesEinNeuesHemd() {
-		assertEquals("ein Hemd", declineEinHemd(Kasus.Nominativ));
-		assertEquals("eines Hemdes", declineEinHemd(Kasus.Genitiv));
-		assertEquals("einem Hemd", declineEinHemd(Kasus.Dativ));
-		assertEquals("ein Hemd", declineEinHemd(Kasus.Akkusativ));
+		assertEquals("ein neues Hemd", declineEinNeuesHemd(Nominativ));
+		assertEquals("eines neuen Hemdes", declineEinNeuesHemd(Genitiv));
+		assertEquals("einem neuen Hemd", declineEinNeuesHemd(Dativ));
+		assertEquals("ein neues Hemd", declineEinNeuesHemd(Akkusativ));
 	}
 
 	@Test
 	public void declinesDasNeueHemd() {
-		assertEquals("das neue Hemd", declineDasNeueHemd(Kasus.Nominativ));
-		assertEquals("des neuen Hemdes", declineDasNeueHemd(Kasus.Genitiv));
-		assertEquals("dem neuen Hemd", declineDasNeueHemd(Kasus.Dativ));
-		assertEquals("das neue Hemd", declineDasNeueHemd(Kasus.Akkusativ));
+		assertEquals("das neue Hemd", declineDasNeueHemd(Nominativ));
+		assertEquals("des neuen Hemdes", declineDasNeueHemd(Genitiv));
+		assertEquals("dem neuen Hemd", declineDasNeueHemd(Dativ));
+		assertEquals("das neue Hemd", declineDasNeueHemd(Akkusativ));
 	}
 
 	@Test
 	public void declinesDasHemd() {
-		assertEquals("das Hemd", declineDasHemd(Kasus.Nominativ));
-		assertEquals("des Hemdes", declineDasHemd(Kasus.Genitiv));
-		assertEquals("dem Hemd", declineDasHemd(Kasus.Dativ));
-		assertEquals("das Hemd", declineDasHemd(Kasus.Akkusativ));
+		assertEquals("das Hemd", declineDasHemd(Nominativ));
+		assertEquals("des Hemdes", declineDasHemd(Genitiv));
+		assertEquals("dem Hemd", declineDasHemd(Dativ));
+		assertEquals("das Hemd", declineDasHemd(Akkusativ));
 	}
 
 	private String declineDenNeuenMantel(Kasus kasus) {
@@ -184,6 +203,10 @@ public class DeclinationTest {
 
 	private String declineEinHemd(Kasus kasus) {
 		return decline(einHemd, kasus);
+	}
+
+	private String declineEinNeuesHemd(Kasus kasus) {
+		return decline(einNeuesHemd, kasus);
 	}
 
 	private String declineDasHemd(Kasus kasus) {
