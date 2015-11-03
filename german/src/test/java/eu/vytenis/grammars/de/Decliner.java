@@ -1,5 +1,8 @@
 package eu.vytenis.grammars.de;
 
+import static eu.vytenis.grammars.de.Kasus.Akkusativ;
+import static eu.vytenis.grammars.de.Kasus.Genitiv;
+import static eu.vytenis.grammars.de.Kasus.Nominativ;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
@@ -32,17 +35,17 @@ public class Decliner {
 	}
 
 	private String getAdjektivEnding() {
-		if (isBestimmte() && kasus == Kasus.Nominativ)
+		if (isBestimmte() && kasus == Nominativ)
 			return "e";
-		else if (isBestimmte() && !isMannlich() && kasus == Kasus.Akkusativ)
+		else if (isBestimmte() && !isMannlich() && kasus == Akkusativ)
 			return "e";
 		else if (isBestimmte())
 			return "en";
-		else if (!isBestimmte() && isWeiblich() && (kasus == Kasus.Nominativ || kasus == Kasus.Akkusativ))
+		else if (!isBestimmte() && isWeiblich() && (kasus == Nominativ || kasus == Akkusativ))
 			return "e";
-		else if (!isBestimmte() && isMannlich() && kasus == Kasus.Nominativ)
+		else if (!isBestimmte() && isMannlich() && kasus == Nominativ)
 			return "er";
-		else if (!isBestimmte() & isNeutral() && (kasus == Kasus.Nominativ || kasus == Kasus.Akkusativ))
+		else if (!isBestimmte() & isNeutral() && (kasus == Nominativ || kasus == Akkusativ))
 			return "es";
 		else
 			return "en";
@@ -53,7 +56,7 @@ public class Decliner {
 	}
 
 	private void declineSubstantiv() {
-		if (kasus == Kasus.Genitiv && !isWeiblich())
+		if (kasus == Genitiv && !isWeiblich())
 			words.add(substantivForGenitivNotWeiblich());
 		else
 			words.add(substantiv());
@@ -84,6 +87,7 @@ public class Decliner {
 	private boolean isMannlich() {
 		return getGesclecht().isMannlich();
 	}
+
 	private boolean isNeutral() {
 		return getGesclecht().isNeutral();
 	}
