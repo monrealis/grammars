@@ -28,6 +28,15 @@ public class BestimmteArtikelFormTest {
 		assertEquals("dem", toString(BestimmteArtikel.Das, Kasus.Dativ));
 		assertEquals("das", toString(BestimmteArtikel.Das, Kasus.Akkusativ));
 	}
+	
+	@Test
+	public void plural() {
+		assertEquals("die", toString(BestimmteArtikel.DiePl, Kasus.Nominativ));
+		assertEquals("der", toString(BestimmteArtikel.DiePl, Kasus.Genitiv));
+		assertEquals("den", toString(BestimmteArtikel.DiePl, Kasus.Dativ));
+		assertEquals("die", toString(BestimmteArtikel.DiePl, Kasus.Akkusativ));
+	}
+
 
 	private String toString(BestimmteArtikel d, Kasus k) {
 		return new BestimmteArtikelForm(d, k).toString();

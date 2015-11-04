@@ -25,6 +25,10 @@ public class BestimmteArtikelForm implements Part, ArtikelForm {
 		r.put(key(BestimmteArtikel.Das, Kasus.Genitiv), "des");
 		r.put(key(BestimmteArtikel.Das, Kasus.Dativ), "dem");
 		r.put(key(BestimmteArtikel.Das, Kasus.Akkusativ), "das");
+		r.put(key(BestimmteArtikel.DiePl, Kasus.Nominativ), "die");
+		r.put(key(BestimmteArtikel.DiePl, Kasus.Genitiv), "der");
+		r.put(key(BestimmteArtikel.DiePl, Kasus.Dativ), "den");
+		r.put(key(BestimmteArtikel.DiePl, Kasus.Akkusativ), "die");
 		return r;
 	}
 

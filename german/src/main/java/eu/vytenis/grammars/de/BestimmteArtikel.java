@@ -3,7 +3,7 @@ package eu.vytenis.grammars.de;
 import lombok.Getter;
 
 public enum BestimmteArtikel implements Artikel, Part {
-	Der(Geschlecht.Mannlich), Die(Geschlecht.Weiblich), Das(Geschlecht.Neutral);
+	Der(Geschlecht.Mannlich), Die(Geschlecht.Weiblich), Das(Geschlecht.Neutral), DiePl(null);
 	@Getter
 	private Geschlecht geschlecht;
 
