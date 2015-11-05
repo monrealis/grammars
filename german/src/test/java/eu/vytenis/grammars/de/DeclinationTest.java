@@ -3,6 +3,7 @@ package eu.vytenis.grammars.de;
 import static eu.vytenis.grammars.de.BestimmteArtikel.Das;
 import static eu.vytenis.grammars.de.BestimmteArtikel.Der;
 import static eu.vytenis.grammars.de.BestimmteArtikel.Die;
+import static eu.vytenis.grammars.de.BestimmteArtikel.DiePl;
 import static eu.vytenis.grammars.de.Kasus.Akkusativ;
 import static eu.vytenis.grammars.de.Kasus.Dativ;
 import static eu.vytenis.grammars.de.Kasus.Genitiv;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DeclinationTest {
@@ -32,7 +34,9 @@ public class DeclinationTest {
 	private Phrase dasHemd = new Phrase(Das, new Substantiv("Hemd"));
 	private Phrase dasNeueHemd = new Phrase(Das, new Adjektiv("neu", "e"), new Substantiv("Hemd"));
 	private Phrase einNeuesHemd = new Phrase(EinN, new Adjektiv("neu", "es"), new Substantiv("Hemd"));
+	private Phrase dieNeuenSchuhe = new Phrase(DiePl, new Adjektiv("neu", "en"), new Substantiv("Schuhe"));
 	static {
+
 		texts.add("der neue Mantel");
 		texts.add("des neuen Mantels");
 		texts.add("dem neuen Mantel");
@@ -167,6 +171,19 @@ public class DeclinationTest {
 		assertEquals("des Hemdes", declineDasHemd(Genitiv));
 		assertEquals("dem Hemd", declineDasHemd(Dativ));
 		assertEquals("das Hemd", declineDasHemd(Akkusativ));
+	}
+
+	@Test
+	@Ignore
+	public void declinesDieNeuenSchuhe() {
+		assertEquals("die neuen Schuhe", declineDieNeuenSchuhe(Nominativ));
+		assertEquals("der neuen Schuhe", declineDieNeuenSchuhe(Genitiv));
+		assertEquals("den neuen Schuhen", declineDieNeuenSchuhe(Dativ));
+		assertEquals("die neuen Schuhe", declineDieNeuenSchuhe(Akkusativ));
+	}
+
+	private String declineDieNeuenSchuhe(Kasus kasus) {
+		return decline(dieNeuenSchuhe, kasus);
 	}
 
 	private String declineDenNeuenMantel(Kasus kasus) {
