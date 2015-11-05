@@ -174,7 +174,7 @@ public class DeclinationTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void declinesDieNeuenSchuhe() {
 		assertEquals("die neuen Schuhe", declineDieNeuenSchuhe(Nominativ));
 		assertEquals("der neuen Schuhe", declineDieNeuenSchuhe(Genitiv));

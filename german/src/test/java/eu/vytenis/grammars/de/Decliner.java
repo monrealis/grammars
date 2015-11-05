@@ -1,6 +1,7 @@
 package eu.vytenis.grammars.de;
 
 import static eu.vytenis.grammars.de.Kasus.Akkusativ;
+import static eu.vytenis.grammars.de.Kasus.Dativ;
 import static eu.vytenis.grammars.de.Kasus.Genitiv;
 import static eu.vytenis.grammars.de.Kasus.Nominativ;
 import static java.util.stream.Collectors.toList;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Decliner {
 	private final Kasus kasus;
 	private final ExpressionParser parser;
-	private final String regexp = "(?<Art>(Der|Die|Das|Ein|Eine|Einn))(?<A>A*)(?<S>S)";
+	private final String regexp = "(?<Art>(Der|Die|Das|Diepl|Ein|Eine|Einn))(?<A>A*)(?<S>S)";
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
@@ -35,6 +36,8 @@ public class Decliner {
 	}
 
 	private String getAdjektivEnding() {
+		if (isPlural())
+			return "en";
 		if (isBestimmte() && kasus == Nominativ)
 			return "e";
 		else if (isBestimmte() && !isMannlich() && kasus == Akkusativ)
@@ -56,7 +59,11 @@ public class Decliner {
 	}
 
 	private void declineSubstantiv() {
-		if (kasus == Genitiv && !isWeiblich())
+		if (isPlural() && kasus == Dativ)
+			words.add(substantiv().withEnding("n"));
+		else if (isPlural())
+			words.add(substantiv());
+		else if (kasus == Genitiv && !isWeiblich())
 			words.add(substantivForGenitivNotWeiblich());
 		else
 			words.add(substantiv());
@@ -69,6 +76,10 @@ public class Decliner {
 		else
 			ending = "s";
 		return substantiv().withEnding(ending);
+	}
+
+	private boolean isPlural() {
+		return isBestimmte() && artikel().getNumerus().isPlural();
 	}
 
 	private boolean isBestimmte() {
