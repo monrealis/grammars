@@ -35,6 +35,10 @@ public class DeclinationTest {
 	private Phrase dasNeueHemd = new Phrase(Das, new Adjektiv("neu", "e"), new Substantiv("Hemd"));
 	private Phrase einNeuesHemd = new Phrase(EinN, new Adjektiv("neu", "es"), new Substantiv("Hemd"));
 	private Phrase dieNeuenSchuhe = new Phrase(DiePl, new Adjektiv("neu", "en"), new Substantiv("Schuhe"));
+	private Phrase guterWein = new Phrase(new Adjektiv("gut", "er"), new Substantiv("Wein"));
+	private Phrase frischeWurst = new Phrase(new Adjektiv("frisch", "e"), new Substantiv("Wurst"));
+	private Phrase kaltesBier = new Phrase(new Adjektiv("kalt", "es"), new Substantiv("Bier"));
+	private Phrase belegteBrote = new Phrase(new Adjektiv("belegt", "e"), new Substantiv("Brote"));
 	static {
 
 		texts.add("der neue Mantel");
@@ -174,12 +178,47 @@ public class DeclinationTest {
 	}
 
 	@Test
-	//@Ignore
 	public void declinesDieNeuenSchuhe() {
 		assertEquals("die neuen Schuhe", declineDieNeuenSchuhe(Nominativ));
 		assertEquals("der neuen Schuhe", declineDieNeuenSchuhe(Genitiv));
 		assertEquals("den neuen Schuhen", declineDieNeuenSchuhe(Dativ));
 		assertEquals("die neuen Schuhe", declineDieNeuenSchuhe(Akkusativ));
+	}
+
+	@Test
+	@Ignore
+	public void declinesGutenWein() {
+		assertEquals("guter Wein", declineGutenWein(Nominativ));
+		assertEquals("guten Weines", declineGutenWein(Genitiv));
+		assertEquals("gutem Wein", declineGutenWein(Dativ));
+		assertEquals("guten Wein", declineGutenWein(Akkusativ));
+	}
+
+	@Test
+	@Ignore
+	public void declinesFrischeWurst() {
+		assertEquals("frische Wurst", declineFrischeWurst(Nominativ));
+		assertEquals("frischer Wurst", declineFrischeWurst(Genitiv));
+		assertEquals("frischer Wurst", declineFrischeWurst(Dativ));
+		assertEquals("frische Wurst", declineFrischeWurst(Akkusativ));
+	}
+
+	@Test
+	@Ignore
+	public void declinesKaltesBier() {
+		assertEquals("kaltes Bier", declineKaltesBier(Nominativ));
+		assertEquals("kalten Bieres", declineKaltesBier(Genitiv));
+		assertEquals("kaltem Bier", declineKaltesBier(Dativ));
+		assertEquals("kaltes Bier", declineKaltesBier(Akkusativ));
+	}
+
+	@Test
+	@Ignore
+	public void declinesBelegeBrote() {
+		assertEquals("belegte Brote", declineBelegteBrote(Nominativ));
+		assertEquals("belegter Brote", declineBelegteBrote(Genitiv));
+		assertEquals("belegten Brote", declineBelegteBrote(Dativ));
+		assertEquals("belegte Brote", declineBelegteBrote(Akkusativ));
 	}
 
 	private String declineDieNeuenSchuhe(Kasus kasus) {
@@ -234,7 +273,23 @@ public class DeclinationTest {
 		return decline(dasNeueHemd, kasus);
 	}
 
+	private String declineGutenWein(Kasus kasus) {
+		return decline(guterWein, kasus);
+	}
+
+	private String declineFrischeWurst(Kasus kasus) {
+		return decline(frischeWurst, kasus);
+	}
+
+	private String declineKaltesBier(Kasus kasus) {
+		return decline(kaltesBier, kasus);
+	}
+
 	private String decline(Phrase phrase, Kasus k) {
 		return new Decliner(phrase, k).decline();
+	}
+
+	private String declineBelegteBrote(Kasus kasus) {
+		return decline(belegteBrote, kasus);
 	}
 }
