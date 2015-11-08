@@ -1,4 +1,4 @@
-package eu.vytenis.grammars.de;
+package eu.vytenis.grammars.de.decl;
 
 import static eu.vytenis.grammars.de.Kasus.Akkusativ;
 import static eu.vytenis.grammars.de.Kasus.Dativ;
@@ -8,6 +8,20 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import eu.vytenis.grammars.de.Adjektiv;
+import eu.vytenis.grammars.de.Artikel;
+import eu.vytenis.grammars.de.BestimmteArtikel;
+import eu.vytenis.grammars.de.BestimmteArtikelForm;
+import eu.vytenis.grammars.de.ExpressionParser;
+import eu.vytenis.grammars.de.Geschlecht;
+import eu.vytenis.grammars.de.Kasus;
+import eu.vytenis.grammars.de.Part;
+import eu.vytenis.grammars.de.Phrase;
+import eu.vytenis.grammars.de.StructureParser;
+import eu.vytenis.grammars.de.Substantiv;
+import eu.vytenis.grammars.de.UnbestimmteArtikel;
+import eu.vytenis.grammars.de.UnbestimmteArtikelForm;
 
 public class Decliner {
 	private final Kasus kasus;

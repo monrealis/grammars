@@ -20,6 +20,8 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import eu.vytenis.grammars.de.decl.Decliner;
+
 public class DeclinationTest {
 	private static List<String> texts = new ArrayList<String>();
 	private Phrase derNeueMantel = new Phrase(Der, new Adjektiv("neu", "e"), new Substantiv("Mantel"));
