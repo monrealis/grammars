@@ -118,7 +118,7 @@ public class Decliner {
 	}
 
 	private Geschlecht getGesclecht() {
-		return artikel().getGeschlecht();
+		return new GeschlectFinder(artikel()).getGesclecht();
 	}
 
 	private Artikel artikel() {
