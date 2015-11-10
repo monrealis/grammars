@@ -53,20 +53,27 @@ public class Decliner {
 	private String getAdjektivEnding() {
 		if (isPlural())
 			return "en";
-		if (isBestimmte() && kasus == Nominativ)
+		if (isBestimmte() && isKasus(Nominativ))
 			return "e";
-		else if (isBestimmte() && !isMannlich() && kasus == Akkusativ)
+		else if (isBestimmte() && !isMannlich() && isKasus(Akkusativ))
 			return "e";
 		else if (isBestimmte())
 			return "en";
-		else if (!isBestimmte() && isWeiblich() && (kasus == Nominativ || kasus == Akkusativ))
+		else if (isUnbestimmte() && isWeiblich() && isKasus(Nominativ, Akkusativ))
 			return "e";
-		else if (!isBestimmte() && isMannlich() && kasus == Nominativ)
+		else if (!isBestimmte() && isMannlich() && isKasus(Nominativ))
 			return "er";
-		else if (!isBestimmte() & isNeutral() && (kasus == Nominativ || kasus == Akkusativ))
+		else if (isUnbestimmte() & isNeutral() && isKasus(Nominativ, Akkusativ))
 			return "es";
 		else
 			return "en";
+	}
+
+	private boolean isKasus(Kasus... kasus) {
+		for (Kasus k : kasus)
+			if (this.kasus == k)
+				return true;
+		return false;
 	}
 
 	private List<Adjektiv> changeAdjektiveEndings(String ending) {
@@ -99,6 +106,10 @@ public class Decliner {
 
 	private boolean isBestimmte() {
 		return artikel() instanceof BestimmteArtikel;
+	}
+
+	private boolean isUnbestimmte() {
+		return artikel() instanceof UnbestimmteArtikel;
 	}
 
 	private void ensureMatches() {
