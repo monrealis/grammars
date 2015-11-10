@@ -74,6 +74,15 @@ public class StructureParser {
 		return parts.iterator().next();
 	}
 
+	public Part getOptionalOne(String regexp, String groupName) {
+		List<Part> parts = get(regexp, groupName);
+		if (parts.isEmpty())
+			return null;
+		if (parts.size() != 1)
+			throw new IllegalArgumentException();
+		return parts.iterator().next();
+	}
+
 	// TODO refactor
 	public List<Part> get(String regexp, String groupName) {
 		Matcher m = matchingMatcher(regexp);

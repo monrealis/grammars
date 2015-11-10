@@ -29,7 +29,7 @@ public class Substantiv implements Part {
 
 	public Substantiv withFeature(Set<SubstantivFeature> features) {
 		// TODO make immutable
-		features.addAll(features);
+		this.features.addAll(features);
 		return this;
 	}
 	

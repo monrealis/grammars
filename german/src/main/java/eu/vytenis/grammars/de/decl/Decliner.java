@@ -26,7 +26,7 @@ import eu.vytenis.grammars.de.UnbestimmteArtikelForm;
 public class Decliner {
 	private final Kasus kasus;
 	private final ExpressionParser parser;
-	private final String regexp = "(?<Art>(Der|Die|Das|Diepl|Ein|Eine|Einn))(?<A>A*)(?<S>S)";
+	private final String regexp = "(?<Art>(Der|Die|Das|Diepl|Ein|Eine|Einn)?)(?<A>A*)(?<S>S)";
 	private List<Part> words = new ArrayList<Part>();
 
 	public Decliner(Phrase phrase, Kasus kasus) {
@@ -36,10 +36,11 @@ public class Decliner {
 
 	public String decline() {
 		ensureMatches();
-		if (isBestimmte())
-			words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
-		else
-			words.add(new UnbestimmteArtikelForm((UnbestimmteArtikel) artikel(), kasus));
+		if (artikel() != null)
+			if (isBestimmte())
+				words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
+			else
+				words.add(new UnbestimmteArtikelForm((UnbestimmteArtikel) artikel(), kasus));
 		declineBestimmte();
 		declineSubstantiv();
 		return new Phrase(words).toString();
@@ -118,11 +119,11 @@ public class Decliner {
 	}
 
 	private Geschlecht getGesclecht() {
-		return new GeschlectFinder(artikel()).getGesclecht();
+		return new GeschlectFinder(artikel(), substantiv()).getGesclecht();
 	}
 
 	private Artikel artikel() {
-		return (Artikel) parser.getOne("Art");
+		return (Artikel) parser.getOptionalOne("Art");
 	}
 
 	private List<Adjektiv> adjektivForms() {

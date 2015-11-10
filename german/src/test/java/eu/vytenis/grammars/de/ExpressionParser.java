@@ -19,6 +19,10 @@ public class ExpressionParser {
 		return parser.getOne(regexp, groupName);
 	}
 
+	public Part getOptionalOne(String groupName) {
+		return parser.getOptionalOne(regexp, groupName);
+	}
+
 	public List<Part> get(String groupName) {
 		return parser.get(regexp, groupName);
 	}

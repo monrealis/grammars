@@ -11,8 +11,10 @@ import static eu.vytenis.grammars.de.Kasus.Nominativ;
 import static eu.vytenis.grammars.de.UnbestimmteArtikel.Ein;
 import static eu.vytenis.grammars.de.UnbestimmteArtikel.EinN;
 import static eu.vytenis.grammars.de.UnbestimmteArtikel.Eine;
+import static java.util.Collections.singleton;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class DeclinationTest {
 	private Phrase dasNeueHemd = new Phrase(Das, new Adjektiv("neu", "e"), new Substantiv("Hemd"));
 	private Phrase einNeuesHemd = new Phrase(EinN, new Adjektiv("neu", "es"), new Substantiv("Hemd"));
 	private Phrase dieNeuenSchuhe = new Phrase(DiePl, new Adjektiv("neu", "en"), new Substantiv("Schuhe"));
-	private Phrase guterWein = new Phrase(new Adjektiv("gut", "er"), new Substantiv("Wein"));
+	private Phrase guterWein = new Phrase(new Adjektiv("gut", "er"), new Substantiv("Wein").withFeature(singleton(SubstantivFeature.IsMannlich)));
 	private Phrase frischeWurst = new Phrase(new Adjektiv("frisch", "e"), new Substantiv("Wurst"));
 	private Phrase kaltesBier = new Phrase(new Adjektiv("kalt", "es"), new Substantiv("Bier"));
 	private Phrase belegteBrote = new Phrase(new Adjektiv("belegt", "e"), new Substantiv("Brote"));
@@ -188,9 +190,9 @@ public class DeclinationTest {
 	}
 
 	@Test
-	@Ignore
 	public void declinesGutenWein() {
 		assertEquals("guter Wein", declineGutenWein(Nominativ));
+		assumeTrue(false);
 		assertEquals("guten Weines", declineGutenWein(Genitiv));
 		assertEquals("gutem Wein", declineGutenWein(Dativ));
 		assertEquals("guten Wein", declineGutenWein(Akkusativ));
