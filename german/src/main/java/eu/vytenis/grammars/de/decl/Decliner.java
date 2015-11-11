@@ -36,17 +36,20 @@ public class Decliner {
 
 	public String decline() {
 		ensureMatches();
-		if (artikel() != null)
-			if (isBestimmte())
-				words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
-			else
-				words.add(new UnbestimmteArtikelForm((UnbestimmteArtikel) artikel(), kasus));
-		declineBestimmte();
+		declineArtikel();
+		declineAdjektive();
 		declineSubstantiv();
 		return new Phrase(words).toString();
 	}
 
-	private void declineBestimmte() {
+	private void declineArtikel() {
+		if (isBestimmte())
+			words.add(new BestimmteArtikelForm((BestimmteArtikel) artikel(), kasus));
+		else if (isUnbestimmte())
+			words.add(new UnbestimmteArtikelForm((UnbestimmteArtikel) artikel(), kasus));
+	}
+
+	private void declineAdjektive() {
 		words.addAll(changeAdjektiveEndings(getAdjektivEnding()));
 	}
 
