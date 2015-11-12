@@ -84,21 +84,26 @@ public class Decliner {
 	}
 
 	private void declineSubstantiv() {
-		if (isPlural() && isKasus(Dativ))
-			words.add(substantiv().withEnding("n"));
-		else if (isPlural())
-			words.add(substantiv());
-		else if (isKasus(Genitiv) && !isWeiblich())
-			words.add(substantiv().withEnding(substantivGenitivEnding()));
-		else
-			words.add(substantiv());
+		words.add(substantiv().withEnding(substantivEnding()));
 	}
 
-	private String substantivGenitivEnding() {
+	private String substantivEnding() {
+		if (isPlural() && isKasus(Dativ))
+			return "n";
+		else if (isKasus(Genitiv) && isSingular() && !isWeiblich())
+			return substantivGenitivEndingS();
+		return "";
+	}
+
+	private String substantivGenitivEndingS() {
 		if (substantiv().getSubstantiv().endsWith("d"))
 			return "es";
 		else
 			return "s";
+	}
+
+	private boolean isSingular() {
+		return !isPlural();
 	}
 
 	private boolean isPlural() {
