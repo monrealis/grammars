@@ -14,7 +14,6 @@ import static eu.vytenis.grammars.de.UnbestimmteArtikel.Eine;
 import static java.util.Collections.singleton;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,7 +192,6 @@ public class DeclinationTest {
 	public void declinesGutenWein() {
 		assertEquals("guter Wein", declineGutenWein(Nominativ));
 		assertEquals("guten Weines", declineGutenWein(Genitiv));
-		assumeTrue(false);
 		assertEquals("gutem Wein", declineGutenWein(Dativ));
 		assertEquals("guten Wein", declineGutenWein(Akkusativ));
 	}

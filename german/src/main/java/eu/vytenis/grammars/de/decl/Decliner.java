@@ -56,6 +56,10 @@ public class Decliner {
 	private String getAdjektivEnding() {
 		if (isPlural())
 			return "en";
+		if (isNoArtikel() && isKasus(Dativ))
+			return "em";
+		if (isNoArtikel() && isKasus(Akkusativ))
+			return "en";
 		if (isBestimmte() && isKasus(Nominativ))
 			return "e";
 		else if (isBestimmte() && !isMannlich() && isKasus(Akkusativ))
@@ -109,6 +113,10 @@ public class Decliner {
 
 	private boolean isPlural() {
 		return isBestimmte() && artikel().getNumerus().isPlural();
+	}
+
+	private boolean isNoArtikel() {
+		return artikel() == null;
 	}
 
 	private boolean isBestimmte() {
