@@ -192,8 +192,8 @@ public class DeclinationTest {
 	@Test
 	public void declinesGutenWein() {
 		assertEquals("guter Wein", declineGutenWein(Nominativ));
-		assumeTrue(false);
 		assertEquals("guten Weines", declineGutenWein(Genitiv));
+		assumeTrue(false);
 		assertEquals("gutem Wein", declineGutenWein(Dativ));
 		assertEquals("guten Wein", declineGutenWein(Akkusativ));
 	}

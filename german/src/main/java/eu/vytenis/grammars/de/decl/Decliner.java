@@ -96,10 +96,11 @@ public class Decliner {
 	}
 
 	private String substantivGenitivEndingS() {
-		if (substantiv().getSubstantiv().endsWith("d"))
-			return "es";
-		else
-			return "s";
+		String s = substantiv().getSubstantiv();
+		for (String ending : new String[] { "d", "n" })
+			if (s.endsWith(ending))
+				return "es";
+		return "s";
 	}
 
 	private boolean isSingular() {
