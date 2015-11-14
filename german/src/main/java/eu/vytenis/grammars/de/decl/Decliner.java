@@ -62,18 +62,17 @@ public class Decliner {
 			return "en";
 		if (isBestimmte() && isKasus(Nominativ))
 			return "e";
-		else if (isBestimmte() && !isMannlich() && isKasus(Akkusativ))
+		if (isBestimmte() && !isMannlich() && isKasus(Akkusativ))
 			return "e";
-		else if (isBestimmte())
+		if (isBestimmte())
 			return "en";
-		else if (isUnbestimmte() && isWeiblich() && isKasus(Nominativ, Akkusativ))
+		if (isUnbestimmte() && isWeiblich() && isKasus(Nominativ, Akkusativ))
 			return "e";
-		else if (!isBestimmte() && isMannlich() && isKasus(Nominativ))
+		if (!isBestimmte() && isMannlich() && isKasus(Nominativ))
 			return "er";
-		else if (isUnbestimmte() & isNeutral() && isKasus(Nominativ, Akkusativ))
+		if (isUnbestimmte() & isNeutral() && isKasus(Nominativ, Akkusativ))
 			return "es";
-		else
-			return "en";
+		return "en";
 	}
 
 	private boolean isKasus(Kasus... kasus) {
